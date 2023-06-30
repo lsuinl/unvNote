@@ -12,17 +12,14 @@ class Basic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          color: Colors.white,
-            child: SafeArea(
-                top: false,
+        body: SafeArea(
+                top: true,
                 bottom: true,
-                child: Padding(
-                  padding: EdgeInsets.all(0),
+                child: Center(
+                  child: Padding(
+                  padding: EdgeInsets.all(paddings.toDouble()),
                     child: widgets,
-                )
-            )
-        )
-    );
+                ))
+            ));
   }
 }
