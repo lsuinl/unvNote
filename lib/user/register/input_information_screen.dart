@@ -22,7 +22,7 @@ TextEditingController texting = TextEditingController();
 class _InputInformationScreenState extends State<InputInformationScreen> {
   @override
   Widget build(BuildContext context) {
-    return  Basic(
+    return Basic(
         paddings: 10,
         widgets: Column(
           children: [
