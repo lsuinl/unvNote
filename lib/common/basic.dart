@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//기본 셋팅 ui
 class Basic extends StatelessWidget {
   final Widget widgets;
   final int paddings;
