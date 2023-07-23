@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:univ_note/common/basic.dart';
-import 'package:univ_note/user/register/component/nextbutton.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../Home.dart';
+import '../../../home/screen/home_screen.dart';
+import '../common/check_string.dart';
 
 class InputOutyearScreen extends StatefulWidget {
   const InputOutyearScreen({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class InputOutyearScreen extends StatefulWidget {
 TextEditingController texting = TextEditingController();
 String title = "졸업연도를 입력하세요.";
 bool check=true;
+bool errorstring=false;
 final year =[2023,2024,2025,2026,2027,2028,2029,2030];
 final month = [2,8];
 String _selectyear = year[0].toString();
@@ -36,10 +37,36 @@ class _InputOutyearScreenState extends State<InputOutyearScreen> {
                       SizedBox(height: 130.h),
                       Text(title, style: TextStyle(fontSize: 22.sp)),
                       SizedBox(height: 10.h),
-                      inputdropnumbers()
+                      inputdropnumbers(),
+                      errorstring==true ?Padding(padding: EdgeInsets.symmetric(vertical: 5.h) ,child:Text("형식이 올바르지 않습니다.",style: TextStyle(color: Colors.red))):Container()
                     ])
             ),
-            NextButton(check: check, screenchange: screenchange)
+            Column(
+                children:[
+                  SizedBox(
+                    //박스사이즈 늘리기 Container 또는 Row 가능,
+                    width: double.infinity,
+                    child:
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: check==false ? Colors.black54: Colors.blueAccent,
+                            elevation: 3,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            padding: EdgeInsets.all(15)),
+                        onPressed: () {
+                          //문자열체크불합격
+                          if(CheckExpectedGraduationDate()==false)
+                            setState(() {
+                              errorstring=true;
+                            });
+                          else if(check==true) screenchange();
+                        },
+                        child: Text('다음', style: TextStyle(fontSize: 15.sp),)
+                    ),),
+                  SizedBox(height: 30.h),
+                ]
+            )
           ],
         ));
   }
