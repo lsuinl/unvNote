@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:univ_note/home/screen/portfolio_screen.dart';
+import 'package:univ_note/home/screen/search_screen.dart';
+import 'package:univ_note/home/screen/setting_screen.dart';
+
+import 'note_screen.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() =>
+      _HomeScreenState();
+}
+
+class _HomeScreenState
+    extends State<HomeScreen> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    PortFolioScreen(),
+    SearchScreen(),
+    NoteScreen(),
+    SettingScreen()
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Container(
+          alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.h),
+              child:  Text('대학생 수첩', style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),),
+            )
+        )
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: '포트폴리오'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: '대외활동'),
+          BottomNavigationBarItem(icon: Icon(Icons.content_paste), label: '기록'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정')
+        ],
+        currentIndex: _selectedIndex,
+        unselectedItemColor: Colors.blueAccent,
+        showUnselectedLabels: true,
+        selectedItemColor: Colors.blueAccent[200],
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}

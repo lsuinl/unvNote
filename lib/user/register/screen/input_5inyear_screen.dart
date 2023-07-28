@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:univ_note/common/basic.dart';
-import 'package:univ_note/user/register/component/nextbutton.dart';
+import 'package:univ_note/user/register/common/check_string.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:univ_note/user/register/screen/input_6outyear_screen.dart';
 
@@ -14,6 +14,7 @@ class InputInyearScreen extends StatefulWidget {
 TextEditingController texting = TextEditingController();
 String title = "입학연도를 입력하세요.";
 bool check=true;
+bool errorstring=false;
 final year =[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
 final month = [2,8];
 String _selectyear = year[0].toString();
@@ -35,10 +36,31 @@ class _InputInyearScreenState extends State<InputInyearScreen> {
                       SizedBox(height: 130.h),
                       Text(title, style: TextStyle(fontSize: 22.sp)),
                       SizedBox(height: 10.h),
-                      inputdropnumbers()
+                      inputdropnumbers(),
+                      errorstring==true ?Padding(padding: EdgeInsets.symmetric(vertical: 5.h) ,child:Text("형식이 올바르지 않습니다.",style: TextStyle(color: Colors.red))):Container()
                     ])
             ),
-            NextButton(check: check, screenchange: screenchange)
+    Column(
+    children:[
+    SizedBox(
+    //박스사이즈 늘리기 Container 또는 Row 가능,
+    width: double.infinity,
+    child:
+    ElevatedButton(
+    style: ElevatedButton.styleFrom(
+    primary: check==false ? Colors.black54: Colors.blueAccent,
+    elevation: 3,
+    shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10)),
+    padding: EdgeInsets.all(15)),
+    onPressed: () {
+      screenchange();
+    },
+    child: Text('다음', style: TextStyle(fontSize: 15.sp),)
+    ),),
+    SizedBox(height: 30.h),
+    ]
+    )
           ],
         ));
   }

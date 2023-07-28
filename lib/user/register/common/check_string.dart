@@ -3,27 +3,30 @@
 //이메일체크
 bool CheckEmail(String email){
   return RegExp(
-      r"^[0-9a-zA-Z-_]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i")
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
       .hasMatch(email);
 }
 
 //인증번호체크
-bool CheckNumber(){
-  return true;
+bool CheckNumber(String number) {
+  try {
+    int.parse(number);
+    return true;
+  } on FormatException {
+    return false;
+  }
 }
 //비밀번호체크
 bool CheckPassword(String password){
-  return true;
+  return RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?~^<>,.&+=])[A-Za-z\d$@$!%*#?~^<>,.&+=]{8,15}$').hasMatch(password);
 }
 //학과체크
 bool CheckMajor(String major){
-
-  return true;
+  return RegExp(r"^[가-힣a-zA-Z]{3,15}$").hasMatch(major);
 }
 //이름체크
 bool CheckName(String name){
-
-  return true;
+  return RegExp(r"^[가-힣a-zA-Z]{1,5}$").hasMatch(name);
 }
 //졸업-입학학년체크
 bool CheckExpectedGraduationDate(){
