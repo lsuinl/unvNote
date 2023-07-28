@@ -123,11 +123,27 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
             SizedBox(height: 10.h),
             Text("나의 목표",style: TextStyle(color: Colors.black54, fontSize: 28.sp, fontWeight: FontWeight.w500)),
           Card(
+            shadowColor: Colors.blue,
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10)
+    ),
               child: CheckboxListTile(
-            title: Text("ㅇㅇ"),
+            title: Text("자격증 따기", style: TextStyle(fontWeight:FontWeight.w600, fontSize: 15.sp),),
             value: isChecked,
             onChanged: (val) {},
           )),
+            Card(
+                shadowColor: Colors.blue,
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                child: CheckboxListTile(
+                  title: Text("봉사활동 하기"),
+                  value: isChecked,
+                  onChanged: (val) {},
+                )),
         ]
     ));
   }
