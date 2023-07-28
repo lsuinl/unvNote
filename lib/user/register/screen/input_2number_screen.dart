@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:univ_note/user/register/common/check_string.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:univ_note/user/register/quest/post_send_verify_email.dart';
 import 'package:univ_note/user/register/quest/post_verify_email_code.dart';
 import 'package:univ_note/user/register/screen/input_3password_screen.dart';
 
@@ -43,6 +44,10 @@ class _InputNumberScreenState extends State<InputNumberScreen> {
                     ])),
     Column(
     children:[
+      TextButton(
+          onPressed:(){},
+          //PostSendVerifyEmail,
+          child: Text("재전송",style: TextStyle(decoration: TextDecoration.underline),)),
     SizedBox(
     //박스사이즈 늘리기 Container 또는 Row 가능,
     width: double.infinity,
@@ -56,11 +61,11 @@ class _InputNumberScreenState extends State<InputNumberScreen> {
     padding: EdgeInsets.all(15)),
     onPressed: () {
     //문자열체크불합격
-    if(CheckNumber(one.text+two.text+three.text+four.text)==false)          
+    if(CheckNumber(one.text+two.text+three.text+four.text)==false)
       setState(() {
         errorstring=true;
       });
-    else {
+    else if(check==true){
       // if(PostVerifyEmailCode(one.text+two.text+three.text+four.text)!=201){ //에러나면
       //   setState(() {
       //     errorstring=true;

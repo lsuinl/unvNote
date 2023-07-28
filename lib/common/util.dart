@@ -9,11 +9,10 @@ Future<UserInformation> GetUserInformation() async {
       email: prefs.getString("email")!,
       password: prefs.getString("password")!,
       name: prefs.getString("name")!,
-      gender: prefs.getString("gender")!,
       univ: prefs.getString("univ")!,
-      department: prefs.getString("email")!,
-      admissionDate: prefs.getString("email")!,
-      expectedGraduationDate: prefs.getString("email")!
+      department: prefs.getString("department")!,
+      admissionDate: prefs.getString("admissionDate")!,
+      expectedGraduationDate: prefs.getString("expectedGraduationDate")!
   );
   return user;
 }

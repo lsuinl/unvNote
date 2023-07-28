@@ -13,7 +13,10 @@ Future<int> PostVerifyEmailCode(String code) async {
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
-      body: jsonEncode({"email": user.email, "code": code}),
+      body: jsonEncode({
+        "email": user.email,
+        "code": code
+      }),
     );
     print(response.body);
     return response.statusCode;

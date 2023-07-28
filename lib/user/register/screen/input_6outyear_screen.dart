@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:univ_note/user/login/screen/login.dart';
+import 'package:univ_note/user/register/quest/post_signup.dart';
 
 import '../../../home/screen/home_screen.dart';
 import '../common/check_string.dart';
@@ -38,7 +41,7 @@ class _InputOutyearScreenState extends State<InputOutyearScreen> {
                       Text(title, style: TextStyle(fontSize: 22.sp)),
                       SizedBox(height: 10.h),
                       inputdropnumbers(),
-                      errorstring==true ?Padding(padding: EdgeInsets.symmetric(vertical: 5.h) ,child:Text("형식이 올바르지 않습니다.",style: TextStyle(color: Colors.red))):Container()
+                      errorstring==true ?Padding(padding: EdgeInsets.symmetric(vertical: 5.h) ,child:Text("입학년도 이후로 설정해야 합니다.",style: TextStyle(color: Colors.red))):Container()
                     ])
             ),
             Column(
@@ -54,13 +57,23 @@ class _InputOutyearScreenState extends State<InputOutyearScreen> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             padding: EdgeInsets.all(15)),
-                        onPressed: () {
+                        onPressed: () async {
                           //문자열체크불합격
-                          if(CheckExpectedGraduationDate()==false)
+                          if(await CheckExpectedGraduationDate((_selectyear+"0"+ _selectmonth).toString())==false){
                             setState(() {
                               errorstring=true;
                             });
-                          else if(check==true) screenchange();
+                          }
+                          else if(check==true) {
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            prefs.setString("expectedGraduationDate", (_selectyear +"0"+ _selectmonth).toString());
+                            //int signUpCheck= await PostSignUp();
+                            // if(signUpCheck==true)
+                            //   screenchange();
+                            // else
+                            //   print("회원가입 문제 발생");
+                            screenchange();
+                          }
                         },
                         child: Text('다음', style: TextStyle(fontSize: 15.sp),)
                     ),),
@@ -111,6 +124,6 @@ class _InputOutyearScreenState extends State<InputOutyearScreen> {
 
   screenchange() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 }

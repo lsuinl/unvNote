@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:univ_note/user/register/common/check_string.dart';
 import 'package:univ_note/user/register/screen/input_5inyear_screen.dart';
 
 class InputSchoolScreen extends StatefulWidget {
@@ -49,12 +51,19 @@ class _InputSchoolScreenState extends State<InputSchoolScreen> {
     shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10)),
     padding: EdgeInsets.all(15)),
-    onPressed: () {
+    onPressed: () async {
     //문자열체크불합격
-    if(major.text==false)          setState(() {
+      if(!CheckMajor(major.text)|| !CheckName(name.text) || school.text=="")
+      setState(() {
       errorstring=true;
     });
-    else if(check==true) screenchange();
+    else if(check==true) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString("univ", school.text);
+        prefs.setString("department", major.text);
+        prefs.setString("name", name.text);
+        screenchange();
+      }
     },
     child: Text('다음', style: TextStyle(fontSize: 15.sp),)
     ),),

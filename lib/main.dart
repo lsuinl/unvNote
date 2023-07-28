@@ -11,7 +11,7 @@ void main() {
       designSize: Size(360, 690),
       builder: (context, child) {
         return MaterialApp(
-          home: HomeScreen(),
+          home: LoginScreen(),
         );
       }));
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:univ_note/user/register/common/check_string.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +38,7 @@ class _InputInyearScreenState extends State<InputInyearScreen> {
                       Text(title, style: TextStyle(fontSize: 22.sp)),
                       SizedBox(height: 10.h),
                       inputdropnumbers(),
-                      errorstring==true ?Padding(padding: EdgeInsets.symmetric(vertical: 5.h) ,child:Text("형식이 올바르지 않습니다.",style: TextStyle(color: Colors.red))):Container()
+                      errorstring==true ?Padding(padding: EdgeInsets.symmetric(vertical: 5.h) ,child:Text("입학년도보다 졸업년도가 더 빠릅니다.",style: TextStyle(color: Colors.red))):Container()
                     ])
             ),
     Column(
@@ -53,8 +54,12 @@ class _InputInyearScreenState extends State<InputInyearScreen> {
     shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10)),
     padding: EdgeInsets.all(15)),
-    onPressed: () {
-      screenchange();
+    onPressed: () async {
+      if(check==true) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString("admissionDate", (_selectyear +"0"+ _selectmonth).toString());
+        screenchange();
+      }
     },
     child: Text('다음', style: TextStyle(fontSize: 15.sp),)
     ),),

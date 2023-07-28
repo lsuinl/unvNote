@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:univ_note/user/register/common/check_string.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,13 +48,16 @@ class _InputPasswordScreenState extends State<InputPasswordScreen> {
     shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10)),
     padding: EdgeInsets.all(15)),
-    onPressed: () {
+    onPressed: () async {
     if(CheckPassword(texting.text)==false)
       setState(() {
         errorstring=true;
       });
-    else if(check==true)
+    else if(check==true) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("univ", texting.text);
       screenchange();
+    }
     },
     child: Text('다음', style: TextStyle(fontSize: 15.sp),)
     ),),
