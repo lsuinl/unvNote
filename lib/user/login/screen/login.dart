@@ -50,8 +50,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                   }
                   else {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => new HomeScreen()));
                   }
                 },
                 child: Text('로그인', style: TextStyle(fontSize: 15.sp),

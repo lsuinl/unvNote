@@ -4,6 +4,7 @@ import 'package:univ_note/common/basic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:univ_note/user/register/common/check_string.dart';
 import 'package:univ_note/user/register/screen/input_5inyear_screen.dart';
+import 'package:univ_note/user/register/screen/search_school_screen.dart';
 
 class InputSchoolScreen extends StatefulWidget {
   const InputSchoolScreen({Key? key}) : super(key: key);
@@ -86,6 +87,11 @@ class _InputSchoolScreenState extends State<InputSchoolScreen> {
           ),
           keyboardType: TextInputType.text,
           controller: school,
+          onTap: (){
+            print(school.text);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => SearchSchoolScreen(school: school)));
+          },
           onChanged: (text){
             setState(() {
               if(school.text!=""&& name.text!="" && major.text!="") check=true;

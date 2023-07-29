@@ -123,7 +123,7 @@ class _InputOutyearScreenState extends State<InputOutyearScreen> {
   }
 
   screenchange() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()),);
   }
 }
