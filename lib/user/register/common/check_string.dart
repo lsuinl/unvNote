@@ -36,7 +36,6 @@ Future<bool> CheckExpectedGraduationDate(String date) async {
   String admissionDate =prefs.getString("admissionDate")!;
   DateTime indate=DateTime(int.parse(admissionDate.substring(0,4)),int.parse(admissionDate.substring(5,6)));
   DateTime outdate=DateTime(int.parse(date.substring(0,4)),int.parse(date.substring(5,6)));
-  print(indate.difference(outdate).inDays);
   if(indate.difference(outdate).inDays<0)//음수: 정상.
     return true;
   else

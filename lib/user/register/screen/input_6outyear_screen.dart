@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:univ_note/user/login/screen/login.dart';
+import 'package:univ_note/user/login/screen/login_screen.dart';
 import 'package:univ_note/user/register/quest/post_signup.dart';
+import 'package:univ_note/user/register/screen/ending_screen.dart';
 
 import '../../../home/screen/home_screen.dart';
 import '../common/check_string.dart';
@@ -124,6 +125,6 @@ class _InputOutyearScreenState extends State<InputOutyearScreen> {
 
   screenchange() {
     Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()),);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EndingScreen()),);
   }
 }
