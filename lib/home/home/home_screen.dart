@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:univ_note/home/screen/portfolio_screen.dart';
-import 'package:univ_note/home/screen/search_screen.dart';
-import 'package:univ_note/home/screen/setting_screen.dart';
+import 'package:univ_note/portfolio/portfolio_main/portfolio_screen.dart';
+import 'package:univ_note/search/search_main/search_screen.dart';
+import 'package:univ_note/setting/setting_main/setting_screen.dart';
 
-import 'note_screen.dart';
+import '../../note/note_main/note_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
