@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:univ_note/common/basic.dart';
+import 'package:univ_note/note/write_note/note_screen.dart';
 
 class NoteScreen extends StatefulWidget {
   const NoteScreen({Key? key}) : super(key: key);
@@ -187,7 +188,7 @@ class _NoteScreenState extends State<NoteScreen> {
 Padding(
   padding:EdgeInsets.all(20),
     child: RawMaterialButton(
-      onPressed: (){},
+      onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => WriteNoteScreen())),
       elevation: 5.0,
       fillColor: Colors.blue[300],
       child: Icon(
