@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:univ_note/note/write_note/note_screen.dart';
 
+import '../note_detail/note_detail_screen.dart';
+
 class NoteScreen extends StatefulWidget {
   const NoteScreen({Key? key}) : super(key: key);
 
@@ -24,8 +26,7 @@ class _NoteScreenState extends State<NoteScreen> {
                 child: Row(
                   children: [
                     InputChip(
-                      onPressed:(){
-                      },
+                      onPressed:(){},
                         label: Text("전체보기",style: TextStyle(fontSize: 14.sp),),
                       backgroundColor: Colors.white70,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
@@ -71,7 +72,7 @@ class _NoteScreenState extends State<NoteScreen> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
                             elevation: 5, //그림자
                             child: InkWell(
-                              onTap: (){},
+                              onTap:()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDeatilScreen())),
                               child: Container(
                                   height: 75.h,
                                   width: MediaQuery.of(context).size.width,
@@ -107,7 +108,7 @@ class _NoteScreenState extends State<NoteScreen> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
                             elevation: 5, //그림자
                             child: InkWell(
-                              onTap: (){},
+                              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDeatilScreen())),
                               child: Container(
                                   height: 75.h,
                                   width: MediaQuery.of(context).size.width,
@@ -145,7 +146,7 @@ class _NoteScreenState extends State<NoteScreen> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
                             elevation: 5, //그림자
                             child: InkWell(
-                              onTap: (){},
+                              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDeatilScreen())),
                               child: Container(
                                   height: 75.h,
                                   width: MediaQuery.of(context).size.width,

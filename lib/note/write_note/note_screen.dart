@@ -23,7 +23,102 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextButton(
-            onPressed: (){},
+            onPressed: (){
+              showDialog(
+                  barrierColor:Colors.white70,
+                  context: context,
+                  barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      contentPadding: EdgeInsets.zero,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          side: BorderSide(color: Colors.black26),
+                      ),
+                      content:Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height/3,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.black12),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              fit:FlexFit.tight,
+                              child:Stack(
+                                alignment: Alignment.centerLeft,
+                        children: [
+                          Padding(padding: EdgeInsets.all(5),
+                          child:  IconButton(padding: EdgeInsets.zero,  constraints: BoxConstraints(),onPressed: ()=>Navigator.pop(context), icon: Icon(Icons.close,size:22.r),color: Colors.black26,)
+                      ),
+                         Container(
+                            alignment: Alignment.center,
+                            child: Text("카테고리 선택",style: TextStyle(fontSize: 19.sp,fontWeight: FontWeight.w600))
+                          ),
+                        ]
+                          ),),
+                            Container(height: 2,color: Colors.black12),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                alignment: Alignment.centerLeft,
+                                minimumSize: Size(MediaQuery.of(context).size.width, 0)
+                              ),
+                                onPressed: (){},
+                                child: Text(" 대외 활동",style: TextStyle(fontSize: 15.sp,color: Colors.black87))),
+                            Container(height: 2,color: Colors.black12),
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                    alignment: Alignment.centerLeft,
+                                    minimumSize: Size(MediaQuery.of(context).size.width, 0)
+                                ),
+                                onPressed: (){},
+                                child: Text(" 교내 활동",style: TextStyle(fontSize: 15.sp,color: Colors.black87))),
+                            Container(height: 2,color: Colors.black12),
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                    alignment: Alignment.centerLeft,
+                                    minimumSize: Size(MediaQuery.of(context).size.width, 0)
+                                ),
+                                onPressed: (){},
+                                child: Text(" 봉사 활동",style: TextStyle(fontSize: 15.sp,color: Colors.black87))),
+                            Container(height: 2,color: Colors.black12),
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                    alignment: Alignment.centerLeft,
+                                    minimumSize: Size(MediaQuery.of(context).size.width, 0)
+                                ),
+                                onPressed: (){},
+                                child: Text(" 자격증",style: TextStyle(fontSize: 15.sp,color: Colors.black87))),
+                            Container(height: 2,color: Colors.black12),
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                    alignment: Alignment.centerLeft,
+                                    minimumSize: Size(MediaQuery.of(context).size.width, 0)
+                                ),
+                                onPressed: (){},
+                                child: Text(" 기타",style: TextStyle(fontSize: 15.sp,color: Colors.black87))),
+                          ],
+                        ),
+                      )
+                      // actions: [
+                      //   TextButton(
+                      //     child: const Text('확인',
+                      //         style: TextStyle(
+                      //             color: Colors.black,
+                      //             fontSize: 16,
+                      //             fontWeight: FontWeight.w700)),
+                      //     onPressed: () {
+                      //       Navigator.of(context).pop();
+                      //     },
+                      //   ),
+                      // ],
+                    );
+                  });
+            },
             style: ButtonStyle(
               overlayColor: MaterialStateColor.resolveWith((states) => Colors.transparent),
                 foregroundColor: MaterialStateProperty.all(Colors.black)),
