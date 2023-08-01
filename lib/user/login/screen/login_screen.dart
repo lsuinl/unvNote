@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:univ_note/home/screen/home_screen.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:univ_note/user/login/quest/post_login.dart';
 import 'package:univ_note/user/register/screen/input_1email_screen.dart';
+
+import '../../../home/home/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
