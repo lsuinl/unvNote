@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../../common/urls.dart';
@@ -9,13 +11,13 @@ Future<int> PostVerifyEmailCode(String code) async {
   UserInformation user = await GetUserInformation();
   try {
     var response = await http.post(
-      Uri.parse('$urls/auth/signup'),
+      Uri.parse('$urls/auth/verify-email-code'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
       body: jsonEncode({
         "email": user.email,
-        "code": code
+        "code": int.parse(code)
       }),
     );
     print(response.body);

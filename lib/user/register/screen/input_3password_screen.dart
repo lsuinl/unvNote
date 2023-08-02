@@ -55,7 +55,7 @@ class _InputPasswordScreenState extends State<InputPasswordScreen> {
       });
     else if(check==true) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("univ", texting.text);
+      prefs.setString("password", texting.text);
       screenchange();
     }
     },

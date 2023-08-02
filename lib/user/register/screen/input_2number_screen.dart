@@ -45,8 +45,7 @@ class _InputNumberScreenState extends State<InputNumberScreen> {
     Column(
     children:[
       TextButton(
-          onPressed:(){},
-          //PostSendVerifyEmail,
+          onPressed:()=>PostSendVerifyEmail(),
           child: Text("재전송",style: TextStyle(decoration: TextDecoration.underline),)),
     SizedBox(
     //박스사이즈 늘리기 Container 또는 Row 가능,
@@ -59,20 +58,21 @@ class _InputNumberScreenState extends State<InputNumberScreen> {
     shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10)),
     padding: EdgeInsets.all(15)),
-    onPressed: () {
+    onPressed: () async {
     //문자열체크불합격
     if(CheckNumber(one.text+two.text+three.text+four.text)==false)
       setState(() {
         errorstring=true;
       });
     else if(check==true){
-      // if(PostVerifyEmailCode(one.text+two.text+three.text+four.text)!=201){ //에러나면
-      //   setState(() {
-      //     errorstring=true;
-      //   });
-      // }
-      // else
-      screenchange();
+      if(await PostVerifyEmailCode(one.text+two.text+three.text+four.text)!=201){ //에러나면
+        setState(() {
+          errorstring=true;
+        });
+      }
+      else {
+        screenchange();
+      }
     }
     },
     child: Text('다음', style: TextStyle(fontSize: 15.sp),)

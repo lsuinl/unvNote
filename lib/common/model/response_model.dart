@@ -1,19 +1,16 @@
 class ResponseModel {
   final int statusCode;
-  final List<dynamic> message;
-  final String error;
+  final Map<String,dynamic> data;
 
   ResponseModel({
     required this.statusCode,
-    required this.message,
-    required this.error,
+    required this.data,
   });
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) {
     return ResponseModel(
-      statusCode: json["statusCode"],
-      message: json["message"],
-      error: json["error"]
+        statusCode: json["statusCode"],
+        data: json["data"]
     );
   }
 }
