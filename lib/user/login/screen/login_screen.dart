@@ -16,7 +16,7 @@ TextEditingController Idcontroller = TextEditingController();
 TextEditingController Passwardcontroller = TextEditingController();
 String title = "이메일 주소를 입력하세요.";
 bool check = false;
-bool errorstring=false;
+String errorstring="";
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
@@ -34,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 20.h),
             Text("비밀번호",style: TextStyle(fontSize:15.sp)),
             inputtext('비밀번호를 입력해주세요.',Passwardcontroller),
+          Text(errorstring,style: TextStyle(color: Colors.red)),
           SizedBox(height: 40.h),
           SizedBox(
             width: double.infinity,
@@ -44,10 +45,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     padding: EdgeInsets.all(15)),
-                onPressed: (){
-                  if(PostLogin(Idcontroller.text, Passwardcontroller.text)!=201){
+                onPressed: () async{
+                  String errortext= await PostLogin(Idcontroller.text, Passwardcontroller.text);
+                  if(errortext!="ok"){
                     setState(() {
-                      errorstring=true;
+                      errorstring=errortext;
                     });
                   }
                   else {

@@ -59,12 +59,13 @@ class _InputEmailScreenState extends State<InputEmailScreen> {
                       else {
                         SharedPreferences prefs = await SharedPreferences.getInstance();
                         prefs.setString("email", texting.text);
-                        // if(PostSendVerifyEmail()!=201){ //에러나면
-                        //   setState(() {
-                        //     errorstring=true;
-                        //   });
-                        // }
-                        // else
+                        PostSendVerifyEmail();
+                        if(await PostSendVerifyEmail()!=201){ //에러나면
+                          setState(() {
+                            errorstring=true;
+                          });
+                        }
+                        else
                           screenchange();
                       }
                     },

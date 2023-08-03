@@ -4,6 +4,7 @@ import 'package:univ_note/common/basic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:univ_note/user/register/screen/ending_screen.dart';
 import '../common/check_string.dart';
+import '../quest/post_signup.dart';
 
 class InputOutyearScreen extends StatefulWidget {
   const InputOutyearScreen({Key? key}) : super(key: key);
@@ -62,14 +63,10 @@ class _InputOutyearScreenState extends State<InputOutyearScreen> {
                             });
                           }
                           else if(check==true) {
-                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                            prefs.setString("expectedGraduationDate", (_selectyear +"0"+ _selectmonth).toString());
-                            //int signUpCheck= await PostSignUp();
-                            // if(signUpCheck==true)
-                            //   screenchange();
-                            // else
-                            //   print("회원가입 문제 발생");
-                            screenchange();
+                            if(await PostSignUp()==201)
+                              screenchange();
+                            else
+                              print("회원가입 문제 발생");
                           }
                         },
                         child: Text('다음', style: TextStyle(fontSize: 15.sp),)

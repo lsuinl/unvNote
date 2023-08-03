@@ -6,13 +6,14 @@ import '../user/register/model/user_information.dart';
 Future<UserInformation> GetUserInformation() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   UserInformation user = UserInformation(
-      email: prefs.getString("email")!,
-      password: prefs.getString("password")!,
-      name: prefs.getString("name")!,
-      univ: prefs.getString("univ")!,
-      department: prefs.getString("department")!,
-      admissionDate: prefs.getString("admissionDate")!,
-      expectedGraduationDate: prefs.getString("expectedGraduationDate")!
+      email: prefs.getString("email")??"",
+      password: prefs.getString("password")??"",
+      name: prefs.getString("name")??"",
+      univ: prefs.getString("univ")??"",
+      department: prefs.getString("department")??"",
+      admissionDate: prefs.getString("admissionDate")??"",
+      expectedGraduationDate: prefs.getString("expectedGraduationDate")??"",
+      accessToken:prefs.getString("accessToken")??""
   );
   return user;
 }
