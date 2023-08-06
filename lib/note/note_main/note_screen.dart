@@ -174,7 +174,6 @@ class _NoteScreenState extends State<NoteScreen> {
                                         ],
                                       )
                                   )
-
                               ),
                             )
                         ),
