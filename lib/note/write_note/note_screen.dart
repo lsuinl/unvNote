@@ -8,7 +8,25 @@ import 'package:univ_note/note/note_main/note_screen.dart';
 import 'package:univ_note/note/write_note/quest/post_records.dart';
 import 'package:univ_note/user/login/screen/login_screen.dart';
 class WriteNoteScreen extends StatefulWidget {
-  const WriteNoteScreen({Key? key}) : super(key: key);
+  final bool isPatch;
+  final int? id;
+  final String? category;
+  final String? title;
+  final String? content;
+  final String? impression;
+  final String? start;
+  final String? end;
+
+  const WriteNoteScreen({
+    this.isPatch=false,
+    this.id,
+    this.category,
+    this.title,
+    this.content,
+    this.impression,
+    this.start,
+    this.end,
+    Key? key}) : super(key: key);
 
 
   @override
@@ -28,6 +46,20 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
       type: MaskAutoCompletionType.lazy
   );
   @override
+  void initState() {
+    if(widget.isPatch==true){
+      setState(() {
+        category=widget.category!;
+        title.text=widget.title!;
+        content.text=widget.content!;
+        impression.text=widget.impression!;
+        date.text=widget.start!+widget.end!;
+      });
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -40,8 +72,12 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
             else if(date.text.length<23) seterrorstring("활동 기간을 입력해주세요");
             else if(content.text=="") seterrorstring("내용을 입력해주세요");
             else{
-              //int stat= PostRecords(category, title.text, content.text, impression.text, date.text.substring(0,10),date.text.substring(13,23));
               int stat =201;
+              // if(widget.isPatch==true)
+              //   stat= await PostRecords(category, title.text, content.text, impression.text, date.text.substring(0,10),date.text.substring(13,23));
+              // else
+              //   stat = await PatchRecords(id:widget.id);
+              //int stat= PostRecords(category, title.text, content.text, impression.text, date.text.substring(0,10),date.text.substring(13,23));
               if(stat==201)   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 2,)),(route)=>false);
               else if(stat==401) {
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()),(route)=>false);

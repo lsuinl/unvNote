@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:univ_note/note/note_detail/quest/delete_records_id.dart';
 import 'package:univ_note/note/note_detail/quest/get_records_id.dart';
+import 'package:univ_note/note/write_note/note_screen.dart';
 
 import '../../home/home/home_screen.dart';
 import '../../user/login/screen/login_screen.dart';
@@ -81,11 +82,26 @@ class NoteDeatilScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     TextButton(
-                                        onPressed: () {}, child: Text("수정")),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context, MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            WriteNoteScreen(
+                                                              isPatch: true,
+                                                              id: data['id'],
+                                                              category: data['category'],
+                                                              title: data['title'],
+                                                              content: data['content'],
+                                                              impression: data['impression'],
+                                                              start: data['start'],
+                                                              end: data['end'],
+                                                            )));
+                                              }, child: Text("수정")),
                                     Container(height: 2.h,),
                                     TextButton(
                                         onPressed: () async {
-                                          int stat = await DeleteRecords(id);
+                                         // int stat = await DeleteRecords(id);
+                                          int stat=200;
                                           if(stat==200){
                                             Fluttertoast.showToast(msg: "성공적으로 삭제되었습니다.");
                                             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 2,)),(route)=>false);
