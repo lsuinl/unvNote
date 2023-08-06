@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:univ_note/common/basic.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:univ_note/home/home/home_screen.dart';
+import 'package:univ_note/note/note_main/note_screen.dart';
 import 'package:univ_note/note/write_note/quest/post_records.dart';
+import 'package:univ_note/user/login/screen/login_screen.dart';
 class WriteNoteScreen extends StatefulWidget {
   const WriteNoteScreen({Key? key}) : super(key: key);
 
@@ -30,13 +34,20 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
             automaticallyImplyLeading:false,
         leading: IconButton(onPressed: ()=>Navigator.pop(context), icon: Icon(Icons.close)),
         actions: [
-          TextButton(onPressed: (){
+          TextButton(onPressed: () async {
             if(category=="") seterrorstring("카테고리를 선택해주세요");
             else if(title.text=="") seterrorstring("제목을 입력해주세요");
             else if(date.text.length<23) seterrorstring("활동 기간을 입력해주세요");
             else if(content.text=="") seterrorstring("내용을 입력해주세요");
             else{
-             // PostRecords(category, title.text, content.text, impression.text, date.text.substring(0,10),date.text.substring(13,23));
+              //int stat= PostRecords(category, title.text, content.text, impression.text, date.text.substring(0,10),date.text.substring(13,23));
+              int stat =201;
+              if(stat==201)   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 2,)),(route)=>false);
+              else if(stat==401) {
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()),(route)=>false);
+                Fluttertoast.showToast(msg: "로그인이 만료되었습니다. 다시 로그인 해주세요.");
+            }
+              else Fluttertoast.showToast(msg: "에러가 발생했습니다. 잠시 후 다시 시도해주세요.");
               print("제대로 전송요청");
             }
             },
