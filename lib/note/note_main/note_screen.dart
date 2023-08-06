@@ -72,7 +72,7 @@ class _NoteScreenState extends State<NoteScreen> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
                             elevation: 5, //그림자
                             child: InkWell(
-                              onTap:()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDeatilScreen())),
+                              onTap:()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDeatilScreen(id:0))),
                               child: Container(
                                   height: 75.h,
                                   width: MediaQuery.of(context).size.width,
@@ -108,7 +108,7 @@ class _NoteScreenState extends State<NoteScreen> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
                             elevation: 5, //그림자
                             child: InkWell(
-                              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDeatilScreen())),
+                              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDeatilScreen(id:0))),
                               child: Container(
                                   height: 75.h,
                                   width: MediaQuery.of(context).size.width,
@@ -146,7 +146,7 @@ class _NoteScreenState extends State<NoteScreen> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
                             elevation: 5, //그림자
                             child: InkWell(
-                              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDeatilScreen())),
+                              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDeatilScreen(id:0))),
                               child: Container(
                                   height: 75.h,
                                   width: MediaQuery.of(context).size.width,

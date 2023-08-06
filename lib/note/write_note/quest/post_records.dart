@@ -4,7 +4,7 @@ import '../../../common/urls.dart';
 import '../../../common/util.dart';
 import '../../../user/register/model/user_information.dart';
 
-//회원가입
+//글쓰기
 Future<int> PostRecords(
     String category,
     String title,
@@ -13,12 +13,15 @@ Future<int> PostRecords(
     String start,
     String end
     ) async {
+
   UserInformation user = await GetUserInformation();
+  String accesstoken = user.accessToken;
   try {
     var response = await http.post(
-      Uri.parse('$urls/POST/records'),
+      Uri.parse('$urls/records'),
       headers: <String, String>{
         'Content-Type': 'application/json',
+        'authorization': 'Bearer $accesstoken',
       },
       body: jsonEncode({
         "category": category,
