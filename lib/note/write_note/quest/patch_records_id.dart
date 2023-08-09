@@ -5,8 +5,8 @@ import '../../../common/util.dart';
 import '../../../user/register/model/user_information.dart';
 
 //글 수정하기
-Future<int> PostRecords(
-    int id,
+Future<int> PatchRecordsId(
+    String id,
     String category,
     String title,
     String content,
@@ -19,7 +19,7 @@ Future<int> PostRecords(
   String accesstoken = user.accessToken;
   try {
     var response = await http.patch(
-      Uri.parse('$urls/records:$id'),
+      Uri.parse('$urls/records/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'authorization': 'Bearer $accesstoken',

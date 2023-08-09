@@ -7,22 +7,23 @@ import '../../../common/util.dart';
 import '../../../user/register/model/user_information.dart';
 
 //글 상세보기
-Future<dynamic> GetRecordsId(String id) async {
+Future<dynamic> GetRecords() async {
   UserInformation user = await GetUserInformation();
   String accesstoken = user.accessToken;
   try {
     var response = await http.get(
-      Uri.parse('$urls/records/$id'),
+      Uri.parse('$urls/records'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'authorization': 'Bearer $accesstoken',
       },
     );
-    print(response.body);
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
     if(response.statusCode==200){
-      ResponseModel responsemodel = ResponseModel.fromJson(body);
-      return responsemodel.data['post'];
+      // ResponseModel responsemodel = ResponseModel.fromJson(body);
+      // print(responsemodel);
+      print(body['data']);
+      return body['data'];
     }
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환

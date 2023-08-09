@@ -10,7 +10,7 @@ import '../../home/home/home_screen.dart';
 import '../../user/login/screen/login_screen.dart';
 
 class NoteDeatilScreen extends StatelessWidget {
-  final int id;
+  final String id;
 
   const NoteDeatilScreen({
     required this.id,
@@ -27,15 +27,16 @@ class NoteDeatilScreen extends StatelessWidget {
       child: FutureBuilder(
         future: GetRecordsId(id),
         builder: (context, snapshot) {
-          if(snapshot.hasData) {
+          if(snapshot.connectionState==ConnectionState.done) {
             if(snapshot.data==401) {
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()),(route)=>false);
               Fluttertoast.showToast(msg: "로그인이 만료되었습니다. 다시 로그인 해주세요.");
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
               return Center(child: Text("데이터를 불러오는 데 문제가 발생했습니다."));
             }
             else if(snapshot.data==404) return Center(child: Text("데이터를 불러오는 데 문제가 발생했습니다."));
             else{
               dynamic data= snapshot.data;
+              print(data);
             return Padding(
               padding: EdgeInsets.all(10),
               child: Column(
@@ -43,7 +44,7 @@ class NoteDeatilScreen extends StatelessWidget {
                 children: [
                   Text(data['title'], style: TextStyle(
                       fontSize: 25.sp, fontWeight: FontWeight.w600)),
-                  Text('${data['start']-data['end']}',
+                  Text('${data['start']} ~ ${data['end']}',
                       style: TextStyle(fontSize: 14.sp, color: Colors.black26)),
                   Container(height: 1, color: Colors.black26,),
                   Flexible(
@@ -100,11 +101,10 @@ class NoteDeatilScreen extends StatelessWidget {
                                     Container(height: 2.h,),
                                     TextButton(
                                         onPressed: () async {
-                                         // int stat = await DeleteRecords(id);
-                                          int stat=200;
+                                          int stat = await DeleteRecords(id);
                                           if(stat==200){
                                             Fluttertoast.showToast(msg: "성공적으로 삭제되었습니다.");
-                                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 2,)),(route)=>false);
+                                         //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 2,)),(route)=>false);
                                           }
                                           else if(stat==401){
                                             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()),(route)=>false);

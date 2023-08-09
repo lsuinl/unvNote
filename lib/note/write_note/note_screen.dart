@@ -5,11 +5,12 @@ import 'package:univ_note/common/basic.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:univ_note/home/home/home_screen.dart';
 import 'package:univ_note/note/note_main/note_screen.dart';
+import 'package:univ_note/note/write_note/quest/patch_records_id.dart';
 import 'package:univ_note/note/write_note/quest/post_records.dart';
 import 'package:univ_note/user/login/screen/login_screen.dart';
 class WriteNoteScreen extends StatefulWidget {
   final bool isPatch;
-  final int? id;
+  final String? id;
   final String? category;
   final String? title;
   final String? content;
@@ -53,7 +54,7 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
         title.text=widget.title!;
         content.text=widget.content!;
         impression.text=widget.impression!;
-        date.text=widget.start!+widget.end!;
+        date.text="${widget.start!} ~ ${widget.end}"!;
       });
     }
     super.initState();
@@ -72,13 +73,13 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
             else if(date.text.length<23) seterrorstring("활동 기간을 입력해주세요");
             else if(content.text=="") seterrorstring("내용을 입력해주세요");
             else{
-              int stat =201;
-              // if(widget.isPatch==true)
-              //   stat= await PostRecords(category, title.text, content.text, impression.text, date.text.substring(0,10),date.text.substring(13,23));
-              // else
-              //   stat = await PatchRecords(id:widget.id);
-              //int stat= PostRecords(category, title.text, content.text, impression.text, date.text.substring(0,10),date.text.substring(13,23));
-              if(stat==201)   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 2,)),(route)=>false);
+              int stat = 0;
+              print(widget.isPatch);
+              if(widget.isPatch==false)
+                stat= await PostRecords(category, title.text, content.text, impression.text, date.text.substring(0,10),date.text.substring(13,23));
+              else
+                stat = await PatchRecordsId(widget.id! ,category, title.text, content.text, impression.text, date.text.substring(0,10),date.text.substring(13,23));
+              if(stat==201 || stat ==200)   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 2,)),(route)=>false);
               else if(stat==401) {
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()),(route)=>false);
                 Fluttertoast.showToast(msg: "로그인이 만료되었습니다. 다시 로그인 해주세요.");
@@ -138,15 +139,15 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
                                 alignment: Alignment.centerLeft,
                                 minimumSize: Size(MediaQuery.of(context).size.width, 0)
                               ),
-                                onPressed: ()=> setcategory("대외 활동"),
-                                child: Text(" 대외 활동",style: TextStyle(fontSize: 15.sp,color: Colors.black87))),
+                                onPressed: ()=> setcategory("교외활동"),
+                                child: Text(" 교외 활동",style: TextStyle(fontSize: 15.sp,color: Colors.black87))),
                             Container(height: 2,color: Colors.black12),
                             TextButton(
                                 style: TextButton.styleFrom(
                                     alignment: Alignment.centerLeft,
                                     minimumSize: Size(MediaQuery.of(context).size.width, 0)
                                 ),
-                                onPressed: ()=>setcategory("교내 활동"),
+                                onPressed: ()=>setcategory("교내활동"),
                                 child: Text(" 교내 활동",style: TextStyle(fontSize: 15.sp,color: Colors.black87))),
                             Container(height: 2,color: Colors.black12),
                             TextButton(
@@ -154,7 +155,7 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
                                     alignment: Alignment.centerLeft,
                                     minimumSize: Size(MediaQuery.of(context).size.width, 0)
                                 ),
-                                onPressed: ()=>setcategory("봉사 활동"),
+                                onPressed: ()=>setcategory("봉사활동"),
                                 child: Text(" 봉사 활동",style: TextStyle(fontSize: 15.sp,color: Colors.black87))),
                             Container(height: 2,color: Colors.black12),
                             TextButton(
