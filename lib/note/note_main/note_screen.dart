@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,6 +16,7 @@ class NoteScreen extends StatefulWidget {
 }
 
 class _NoteScreenState extends State<NoteScreen> {
+  List<Widget> list=[];
   @override
   Widget build(BuildContext context) {
     return Basic(
@@ -39,8 +38,15 @@ class _NoteScreenState extends State<NoteScreen> {
             else {
               if(snapshot.hasData) {
                 List<dynamic> datas=snapshot.data!;
-                List<Widget> cards = datas.map(
-                        (e) =>   Card(
+                Map<String,List<Widget>> cards={};
+                datas.forEach((e) => cards[e['category']]=[
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 7),child:
+                  Text(e['category'],
+                    style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.w600)
+                  ))]);
+                datas.forEach(
+                        (e) => cards[e['category']]!.add(
+                            Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius
                                     .circular(16.r)),
@@ -112,7 +118,53 @@ class _NoteScreenState extends State<NoteScreen> {
                               ),
                             )
                         )
-                ).toList();
+                ));
+                List<Widget> EntireCards=[];
+               cards.values.forEach((element) {
+                  EntireCards.addAll(element);
+                  EntireCards.add(SizedBox(height: 10.h));
+                });
+
+               List<Widget> Buttons=[  InputChip(
+                 onPressed: () {
+                   list=EntireCards;
+                 },
+                 label: Text(
+                   "전체보기",
+                   style: TextStyle(fontSize: 14.sp),),
+                 backgroundColor: Colors.white70,
+                 shape: RoundedRectangleBorder(
+                     borderRadius: BorderRadius.circular(
+                         8.r)),
+                 side: BorderSide(
+                     color: Colors.black54
+                 ),
+               ),
+                 SizedBox(width: 10.w)];
+
+               cards.forEach((key, value) {
+                 Buttons.add(
+                   InputChip(
+                     onPressed: () {
+                       setState(() {
+                         list=value;
+                       });
+                     },
+                     label: Text(
+                       key,
+                       style: TextStyle(fontSize: 14.sp),),
+                     backgroundColor: Colors.white70,
+                     shape: RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(
+                             8.r)),
+                     side: BorderSide(
+                         color: Colors.black54
+                     ),
+                   )
+                 );
+                 Buttons.add(SizedBox(width: 10.w));
+               });
+               list=EntireCards;
                 return Stack(
                     children: [
                       Column(
@@ -121,50 +173,7 @@ class _NoteScreenState extends State<NoteScreen> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 5),
                                 child: Row(
-                                  children: [
-                                    InputChip(
-                                      onPressed: () {},
-                                      label: Text(
-                                        "전체보기",
-                                        style: TextStyle(fontSize: 14.sp),),
-                                      backgroundColor: Colors.white70,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              8.r)),
-                                      side: BorderSide(
-                                          color: Colors.black54
-                                      ),
-                                    ),
-                                    SizedBox(width: 10.w),
-                                    InputChip(
-                                      onPressed: () {},
-                                      label: Text(
-                                        "교내활동",
-                                        style: TextStyle(fontSize: 14.sp),),
-                                      backgroundColor: Colors.white70,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              8.r)),
-                                      side: BorderSide(
-                                          color: Colors.black54
-                                      ),
-                                    ),
-                                    SizedBox(width: 10.w),
-                                    InputChip(
-                                      onPressed: () {},
-                                      label: Text(
-                                        "봉사활동",
-                                        style: TextStyle(fontSize: 14.sp),),
-                                      backgroundColor: Colors.white70,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              8.r)),
-                                      side: BorderSide(
-                                          color: Colors.black54
-                                      ),
-                                    ),
-                                    SizedBox(width: 10.w)
-                                  ],
+                                  children: Buttons,
                                 )),
                             Container(height: 1, color: Colors.black),
                             Flexible(child:
@@ -175,7 +184,7 @@ class _NoteScreenState extends State<NoteScreen> {
                                       children: [ Column(
                                           crossAxisAlignment: CrossAxisAlignment
                                               .start,
-                                          children: cards
+                                          children: list
                                       )
                                       ],
                                     )

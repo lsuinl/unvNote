@@ -104,7 +104,7 @@ class NoteDeatilScreen extends StatelessWidget {
                                           int stat = await DeleteRecords(id);
                                           if(stat==200){
                                             Fluttertoast.showToast(msg: "성공적으로 삭제되었습니다.");
-                                         //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 2,)),(route)=>false);
+                                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 2,)),(route)=>false);
                                           }
                                           else if(stat==401){
                                             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()),(route)=>false);
