@@ -65,9 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정')
         ],
         currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.black54,
         showUnselectedLabels: true,
-        selectedItemColor: Colors.blueAccent[200],
+        selectedItemColor: Colors.blueAccent,
+        selectedFontSize: 16.sp,
         onTap: _onItemTapped,
       ),
     );
