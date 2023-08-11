@@ -24,18 +24,19 @@ class _CategoryButtonState extends State<CategoryButton> {
     return Row(
       children: [
         InputChip(
+
+          pressElevation: 0,
           onPressed: () =>widget.set(),
           label: Text(
             widget.name,
-            style: TextStyle(fontSize: 14.sp),),
-          backgroundColor: buttoncolor[widget.name]==true? Colors.blueAccent:Colors.white,
+            style: TextStyle(fontSize: 14.sp, color: buttoncolor[widget.name]==true? Color(0xFF1C7DEC):Colors.black87)),
+          backgroundColor: buttoncolor[widget.name]==true? Color(0xFFE8F2FD):Colors.white,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
                   8.r)),
           side: BorderSide(
-              color: Colors.black54
+              color: buttoncolor[widget.name]==true? Color(0xFF1C7DEC):Colors.black54)
           ),
-        ),
         SizedBox(width: 10.w)
       ],
     );

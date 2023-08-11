@@ -38,19 +38,21 @@ class NoteDeatilScreen extends StatelessWidget {
               dynamic data= snapshot.data;
               print(data);
             return Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(data['title'], style: TextStyle(
-                      fontSize: 25.sp, fontWeight: FontWeight.w600)),
+                      fontSize: 27.sp, fontWeight: FontWeight.w600)),
                   Text('${data['start']} ~ ${data['end']}',
-                      style: TextStyle(fontSize: 14.sp, color: Colors.black26)),
-                  Container(height: 1, color: Colors.black26,),
+                      style: TextStyle(fontSize: 14.sp, color: Colors.black87)),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 10),
+                  child: Container(height: 1, color: Colors.black26,) ),
                   Flexible(
                       child: Stack(
                         children: [
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                   child: Padding(
@@ -60,7 +62,7 @@ class NoteDeatilScreen extends StatelessWidget {
                                           child: Text(
                                               data['content'],
                                               style: TextStyle(
-                                                  fontSize: 15.sp))))),
+                                                  fontSize: 18.sp))))),
                               Container(height: 1, color: Colors.black26,),
                               Expanded(
                                   child:
@@ -71,7 +73,7 @@ class NoteDeatilScreen extends StatelessWidget {
                                           child: Text(
                                               data['impression'],
                                               style: TextStyle(
-                                                  fontSize: 15.sp))))),
+                                                  fontSize: 18.sp))))),
                               Container(height: 1, color: Colors.black26,),
                             ],
                           ),

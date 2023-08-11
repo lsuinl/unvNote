@@ -26,7 +26,7 @@ class PostCard extends StatelessWidget {
         Card(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.r)),
-            elevation: 5, //그림자
+            elevation: 3, //그림자
             child: InkWell(
               onTap: () => Navigator.push(
                   context,
@@ -47,15 +47,23 @@ class PostCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(title,
-                                  style: TextStyle(
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.w600)),
-                              Text(
+                              Container(
+                                child:Text(
+                                    title,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w600)),
+                              ),
+                              Container(
+                                width:MediaQuery.of(context).size.width/1.4,
+                              child: Text(
                                 content,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500),
+                              ),
                               ),
                               Text(
                                 "${start}~${end}",

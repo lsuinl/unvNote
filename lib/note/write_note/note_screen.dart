@@ -94,6 +94,13 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
     body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child:Container(
+            alignment: Alignment.centerRight,
+            child: Text(errorString,style: TextStyle(color: Colors.red))
+        ),
+        ),
         TextButton(
             onPressed: (){
               showDialog(
@@ -196,7 +203,7 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
                 foregroundColor: MaterialStateProperty.all(Colors.black)),
             child:FittedBox(
                 child: Row(
-                children:[Text(category=="" ? "카테고리 선택":category), Icon(Icons.keyboard_arrow_down)]
+                children:[Text(category=="" ? "카테고리 선택":category,style: TextStyle(fontSize: 16.sp),), Icon(Icons.keyboard_arrow_down)]
         )),),
         TextFormField(
           controller: title,
@@ -204,7 +211,7 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
             hintText: "제목을 입력해주세요.",
             border: OutlineInputBorder(borderSide: BorderSide.none)
           ),
-          style: TextStyle(fontSize: 18.sp),
+          style: TextStyle(fontSize: 20.sp),
         ),
         Container(height: 1, color: Colors.black26,),
         TextFormField(
@@ -215,7 +222,7 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
               hintText: "2023-03-05~2023-07-22",
               border: OutlineInputBorder(borderSide: BorderSide.none),
           ),
-          style: TextStyle(fontSize: 10.sp),
+          style: TextStyle(fontSize: 12.sp),
         ),
         Container(height: 1, color: Colors.black26),
          Flexible(
@@ -226,7 +233,7 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
                         hintText: "내용을 입력해주세요.",
                         border: OutlineInputBorder(borderSide: BorderSide.none)
                     ),
-                    style: TextStyle(fontSize: 12.sp),
+                    style: TextStyle(fontSize: 17.sp),
                     maxLines: 200,
                   )
           ),
@@ -240,7 +247,7 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
                     hintText: "소감을 입력해주세요.",
                     border: OutlineInputBorder(borderSide: BorderSide.none)
                 ),
-                style: TextStyle(fontSize: 12.sp),
+                style: TextStyle(fontSize: 17.sp),
                 maxLines: 200,
               )
           ),
