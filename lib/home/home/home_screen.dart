@@ -7,15 +7,18 @@ import 'package:univ_note/setting/setting_main/setting_screen.dart';
 import '../../note/note_main/note_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final int selectedIndex;
+
+  const HomeScreen({
+    required this.selectedIndex,
+    super.key}
+      );
 
   @override
-  State<HomeScreen> createState() =>
-      _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState
-    extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -32,6 +35,13 @@ class _HomeScreenState
     });
   }
 
+  @override
+  void initState() {
+    setState(() {
+      _selectedIndex = widget.selectedIndex;
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +65,10 @@ class _HomeScreenState
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정')
         ],
         currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.black54,
         showUnselectedLabels: true,
-        selectedItemColor: Colors.blueAccent[200],
+        selectedItemColor: Colors.blueAccent,
+        selectedFontSize: 16.sp,
         onTap: _onItemTapped,
       ),
     );
