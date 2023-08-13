@@ -11,6 +11,7 @@ import 'package:univ_note/setting/setting_main/component/profile_button.dart';
 
 import '../../common/basic.dart';
 import '../../user/register/model/user_information.dart';
+import 'common/caculater_d_day.dart';
 
 class PortFolioScreen extends StatefulWidget {
   const PortFolioScreen({Key? key}) : super(key: key);
@@ -39,11 +40,11 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
                         major: user.department,
                         end: user.expectedGraduationDate),
                     SizedBox(height: 10.h),
-                    D_DayButton(name: "종강 ✨", number: 45),
+                    D_DayButton(name: CaculaterClass(user.Class_D_day),clas: user.Class_D_day,grad: false,state: state),
                     SizedBox(height: 10.h),
                     PercentView(percent: 0.7),
                     SizedBox(height: 10.h),
-                    D_DayButton(name: "졸업 🎓", number: 450),
+                    D_DayButton(name: "졸업 🎓", clas: user.expectedGraduationDate,grad: true,state:state),
                     SizedBox(height: 10.h),
                     PercentView(percent: 0.5),
                     SizedBox(height: 10.h),
@@ -60,6 +61,10 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
         else{
           return CircularProgressIndicator();
         }
+    });
+  }
+  state(){
+    setState(() {
     });
   }
 }

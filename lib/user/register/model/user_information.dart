@@ -7,6 +7,7 @@ class UserInformation {
   final String admissionDate;
   final String expectedGraduationDate;
   final String accessToken;
+  final String Class_D_day;
 
   UserInformation({
     required this.email,
@@ -16,6 +17,7 @@ class UserInformation {
     required this.department,
     required this.admissionDate,
     required this.expectedGraduationDate,
-    required this.accessToken
+    required this.accessToken,
+    required this.Class_D_day
   });
 }
