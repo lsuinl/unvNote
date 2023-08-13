@@ -11,19 +11,20 @@ class PercentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double percents= percent>1? 1 : percent;
     return Column(
       children: [
         Row(
           children: [
-            SizedBox(width: MediaQuery.of(context).size.width/123*(percent*100)),
+            SizedBox(width: MediaQuery.of(context).size.width/123*(percents*100)),
             Icon(Icons.run_circle,size: 50.r,color: Colors.blue,),
           ],
         ),
         LinearPercentIndicator(
           barRadius: Radius.circular(20),
-          percent: percent,
+          percent: percents,
           animation: true,
-          center: Text("${percent*100}%"),
+          center: Text("${(percents*100).toStringAsFixed(2)}%"),
           animationDuration:1400,
           progressColor: Colors.blue,
           lineHeight: 15.h,
