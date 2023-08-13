@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:univ_note/portfolio/todos_list/todos_list_screen.dart';
 
 class MoveTodoListButton extends StatelessWidget {
   const MoveTodoListButton({Key? key}) : super(key: key);
@@ -7,7 +8,9 @@ class MoveTodoListButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: (){},
+        onPressed: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) =>
+              TodosListScreen())),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
