@@ -7,7 +7,7 @@ import '../../../common/util.dart';
 import '../../../user/register/model/user_information.dart';
 
 //목표 생성하기
-Future<dynamic> PostTodos(String date, String content) async {
+Future<dynamic> PostTodos(String content,String date) async {
   UserInformation user = await GetUserInformation();
   String accesstoken = user.accessToken;
   try {
@@ -24,11 +24,11 @@ Future<dynamic> PostTodos(String date, String content) async {
     );
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
     print(body);
-    if(response.statusCode==200){
+    if(response.statusCode==201){
       // ResponseModel responsemodel = ResponseModel.fromJson(body);
       // print(responsemodel);
       print(body['data']);
-      return body['data'];
+      return response.statusCode;
     }
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환

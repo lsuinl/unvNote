@@ -14,9 +14,9 @@ class TodosListScreen extends StatefulWidget {
   @override
   State<TodosListScreen> createState() => _TodosListScreenState();
 }
+List<Widget> list=[];
 //Map<String,bool> buttoncolor ={"전체보기":true};
 class _TodosListScreenState extends State<TodosListScreen> {
-  List<Widget> list=[];
   ScrollController controller=ScrollController();
 
   @override
@@ -71,18 +71,18 @@ class _TodosListScreenState extends State<TodosListScreen> {
 
   //투두 생성하기
   void addTodos() async{
+    print("이건왜?");
     setState(() {
       list.add(StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-            return TodosCardInput();
+            return TodosCardInput(check: set);
           }));
       controller.animateTo(controller.position.maxScrollExtent, duration: Duration(seconds:1), curve: Curves.fastOutSlowIn,);
     });
   }
-
-  void set() {
-    setState(() {
-    });
+  set(){
+    initList();
+    print("실행되다..");
   }
   void initList() async {
      //실제 나타낼 데이터
@@ -93,14 +93,16 @@ class _TodosListScreenState extends State<TodosListScreen> {
         id: e['id'],
         name: e['content'],
         isChecked: e['isChecked'],
-        check: () {},
+        check:set,
         date: e['year'])).toList();
-
     setState(() {
+      print("그려");
+
       if(data.length==0)
         list=[Center(child:Text("작성된 목록이 없습니다"))];
-      else if(data.length!=list.length) {
+      else {
         list=[];
+        print(list);
         for (int i = 0; i < data.length; i++) {
           list.add(SwipeActionCell(
               key: ObjectKey(widgets[i]),
@@ -109,8 +111,10 @@ class _TodosListScreenState extends State<TodosListScreen> {
                     title: "delete",
                     onTap: (CompletionHandler handler) async {
                       DeleteTodosId(widgets[i].id!);
-                      widgets.removeAt(i);
-                      set();
+                     setState(() {
+                       widgets.removeAt(i);
+                       list.removeAt(i);
+                     });
                     },
                     color: Colors.red),
               ],
