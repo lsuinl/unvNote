@@ -16,6 +16,7 @@ class TodosListScreen extends StatefulWidget {
 }
 List<Widget> list=[];
 //Map<String,bool> buttoncolor ={"전체보기":true};
+Map<String,bool> todocheck ={};
 class _TodosListScreenState extends State<TodosListScreen> {
   ScrollController controller=ScrollController();
 
@@ -26,12 +27,11 @@ class _TodosListScreenState extends State<TodosListScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    print(list);
     if(list.length>0) {
       return Scaffold(
           appBar: AppBar(
               title: Text("목표 체크리스트", style: TextStyle(
-                  fontSize: 20.sp, fontWeight: FontWeight.w500))
+                  fontSize: 20.sp, fontWeight: FontWeight.w500)),
           ),
           body: SafeArea(
               bottom: true,
@@ -71,7 +71,6 @@ class _TodosListScreenState extends State<TodosListScreen> {
 
   //투두 생성하기
   void addTodos() async{
-    print("이건왜?");
     setState(() {
       list.add(StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
@@ -82,11 +81,11 @@ class _TodosListScreenState extends State<TodosListScreen> {
   }
   set(){
     initList();
-    print("실행되다..");
   }
   void initList() async {
      //실제 나타낼 데이터
     List<dynamic> data = await GetTodos();
+    data.map((e) => todocheck[e['id']]=e['isChecked']); //데이터 체크여부 바꿔주기
     List<TodosCardInput> widgets = data.map((e) => //데이터 위젯리스트화하기
     TodosCardInput(
         isPatch: true,
@@ -96,13 +95,10 @@ class _TodosListScreenState extends State<TodosListScreen> {
         check:set,
         date: e['year'])).toList();
     setState(() {
-      print("그려");
-
       if(data.length==0)
         list=[Center(child:Text("작성된 목록이 없습니다"))];
       else {
         list=[];
-        print(list);
         for (int i = 0; i < data.length; i++) {
           list.add(SwipeActionCell(
               key: ObjectKey(widgets[i]),

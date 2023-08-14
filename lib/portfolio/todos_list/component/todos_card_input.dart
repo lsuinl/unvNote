@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:univ_note/portfolio/portfolio_main/quest/patch_todos_check_id.dart';
 import 'package:univ_note/portfolio/todos_list/quest/patch_todos_id.dart';
 import 'package:univ_note/portfolio/todos_list/quest/post_todos.dart';
+import 'package:univ_note/portfolio/todos_list/todos_list_screen.dart';
 
 class TodosCardInput extends StatefulWidget {
   final String? id;
@@ -86,8 +88,16 @@ class _TodosCardInputState extends State<TodosCardInput> {
                                 color:Colors.black12
                             ),
                             shape: CircleBorder(),
-                            value: widget.isChecked?? false,
-                            onChanged: (val){}))
+                            value: todocheck[widget.id]??false,
+                            onChanged: (val){
+                              setState(() {
+                                print(val);
+                                if(widget.isPatch==true) {
+                                  todocheck[widget.id!] = val!;
+                                  PatchTodosCheckId(widget.id!);
+                                }
+                              });
+                            }))
                   ],
                 ),
                 Container(color: Colors.black12,height: 1.5.h),
