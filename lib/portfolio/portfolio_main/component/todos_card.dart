@@ -57,9 +57,6 @@ class _TodosCardState extends State<TodosCard> {
                     value: widget.isChecked,
                     onChanged: (val) async {
                       await PatchTodosCheckId(widget.id);
-                      setState(() {
-                        isChecked[widget.id]=!val!;
-                      });
                       widget.check();
                     }))
               ],

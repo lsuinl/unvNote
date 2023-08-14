@@ -14,7 +14,6 @@ import 'package:univ_note/setting/setting_main/component/profile_button.dart';
 
 import '../../common/basic.dart';
 import '../../user/register/model/user_information.dart';
-import 'common/caculater_d_day.dart';
 import 'common/find_start_or_end.dart';
 import 'common/set_start_dday.dart';
 
@@ -25,8 +24,10 @@ class PortFolioScreen extends StatefulWidget {
   State<PortFolioScreen> createState() => _PortFolioScreenState();
 }
 late UserInformation? user=null;
-late List<Widget> todos;
-Map<String,bool> isChecked={};
+List<Widget> todos= [
+  Container(
+    height: 100.h,
+  child: Center(child: Text("설정된 목표가 없습니다.")))];
 class _PortFolioScreenState extends State<PortFolioScreen> {
   @override
   void initState() {
@@ -68,42 +69,38 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
                 SizedBox(height: 10.h),
                 MoveTodoListButton(),
                 Column(
-                  children: todos ?? [Center(child: Text("설정된 목표가 없습니다."),)],
+                  children: todos,
                 )
               ]
           ));
   }
   loadingHome() async {
     var inuser =await GetUserInformation();
-    List<dynamic> intodos= await GetTodos();
-    List<Widget> list= intodos.map((e) => e['isChecked']==false ? TodosCard(
+    List<dynamic> intodos= await GetTodosTrue();
+    List<Widget> list= intodos.map((e) => TodosCard(
           id: e['id'],
           name: e['content'],
           isChecked: e['isChecked'],
           check: state,
-          date: e['year'])
-            :Container()).toList();
+          date: e['year'])).toList();
 
     setState(() {
-      intodos.map((e) => isChecked[e['id']] = e['isChecked']);
       user=inuser;
-      todos= list;
+      if(list.length>0)todos= list;
     });
   }
 
   state() async {
-    List<dynamic> intodos= await GetTodos();
-    List<Widget> list= intodos.map((e) => e['isChecked']==false ? TodosCard(
+    List<dynamic> intodos= await GetTodosTrue();
+    List<Widget> list= intodos.map((e) => TodosCard(
         id: e['id'],
         name: e['content'],
         isChecked: e['isChecked'],
         check: state,
-        date: e['year'])
-        :Container()).toList();
+        date: e['year'])).toList();
 
     setState(() {
-      todos=list;
+      if(list.length>0)todos= list;
     });
-    print(todos);
   }
 }

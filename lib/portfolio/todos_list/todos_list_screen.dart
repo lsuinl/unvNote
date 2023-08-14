@@ -6,7 +6,7 @@ import 'package:univ_note/portfolio/portfolio_main/component/todos_card.dart';
 import 'package:univ_note/portfolio/todos_list/component/add_todos_button.dart';
 import 'package:univ_note/portfolio/todos_list/component/todos_card_input.dart';
 
-import '../portfolio_main/quest/post_todos.dart';
+import 'quest/post_todos.dart';
 import 'component/category_year_button.dart';
 
 class TodosListScreen extends StatefulWidget {

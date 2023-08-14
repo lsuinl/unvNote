@@ -7,7 +7,7 @@ import '../../../common/util.dart';
 import '../../../user/register/model/user_information.dart';
 
 //전체 목표 조회
-Future<dynamic> GetTodosTrue() async {
+Future<dynamic> GetTodos() async {
   UserInformation user = await GetUserInformation();
   String accesstoken = user.accessToken;
   try {
@@ -21,9 +21,8 @@ Future<dynamic> GetTodosTrue() async {
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
     if(response.statusCode==200){
       ResponseModel responsemodel = ResponseModel.fromJson(body);
-      List<dynamic> list =responsemodel.data['todolist'];
-      list = list.where((i) => i['isChecked']==false).toList();
-      return list;
+      print(responsemodel.data['todolist']);
+      return responsemodel.data['todolist'];
     }
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환
