@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 class AddTodosButton extends StatelessWidget {
-  const AddTodosButton({Key? key}) : super(key: key);
+  final VoidCallback onPressed;
+
+  const AddTodosButton({
+    required this.onPressed,
+    Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.all(20),
         child: RawMaterialButton(
-          onPressed: (){},
+          onPressed: onPressed,
           elevation: 5.0,
           fillColor: Colors.white,
           child: Icon(

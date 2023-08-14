@@ -9,7 +9,8 @@ class MoveTodoListButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) =>
+          context,
+          MaterialPageRoute(builder: (context) =>
               TodosListScreen())),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
