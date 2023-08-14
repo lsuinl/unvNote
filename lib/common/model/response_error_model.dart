@@ -1,7 +1,7 @@
 class ResponseErrorModel {
   final int statusCode;
-  final List<dynamic> message;
-  final String error;
+  final dynamic message;
+  final String? error;
 
   ResponseErrorModel({
     required this.statusCode,
