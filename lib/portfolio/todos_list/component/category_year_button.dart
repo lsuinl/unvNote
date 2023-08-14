@@ -18,7 +18,7 @@ class CategoryYearButton extends StatelessWidget {
       children: [
       InputChip(
         pressElevation: 0,
-        onPressed: () =>set(),
+        onPressed: set,
         label: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text(name, style: TextStyle(fontSize: 14.sp, color: Colors.black87,fontWeight: FontWeight.w300)),
