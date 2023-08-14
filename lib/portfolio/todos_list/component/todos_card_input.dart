@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:univ_note/portfolio/portfolio_main/quest/patch_todos_check_id.dart';
 import 'package:univ_note/portfolio/todos_list/quest/patch_todos_id.dart';
 import 'package:univ_note/portfolio/todos_list/quest/post_todos.dart';
@@ -151,7 +150,3 @@ class _TodosCardInputState extends State<TodosCardInput> {
     }
   }
 }
-
-//focusnode로 벗어나면 제목입력/날짜(모두)입력 상태 확인하고 전송하기, 조건 불만족시 경고문구
-//이미 있던 글인지, 없는 글인지 확인하고 전송
-//전체적으로 체크리스트 모양새 확인하고 전송하기

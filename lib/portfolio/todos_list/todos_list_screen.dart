@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:univ_note/home/home/home_screen.dart';
 import 'package:univ_note/portfolio/todos_list/component/add_todos_button.dart';
 import 'package:univ_note/portfolio/todos_list/component/todos_card_input.dart';
 import 'package:univ_note/portfolio/todos_list/quest/delete_todos_id.dart';
 import 'package:univ_note/portfolio/todos_list/quest/get_todos.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
-import 'package:univ_note/portfolio/todos_list/quest/post_todos.dart';
+import 'package:univ_note/portfolio/todos_list/quest/get_year_category.dart';
 import 'component/category_year_button.dart';
 
 class TodosListScreen extends StatefulWidget {
@@ -15,21 +16,27 @@ class TodosListScreen extends StatefulWidget {
   State<TodosListScreen> createState() => _TodosListScreenState();
 }
 List<Widget> list=[];
-//Map<String,bool> buttoncolor ={"전체보기":true};
+Map<String,bool> buttoncolor ={"전체보기":true};
 Map<String,bool> todocheck ={};
+String year="";
 class _TodosListScreenState extends State<TodosListScreen> {
   ScrollController controller=ScrollController();
 
   @override
   void initState() {
-    initList();
+    initList(year);
+    getcategory();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
+    List<Widget> category=makebuttons();
     if(list.length>0) {
       return Scaffold(
           appBar: AppBar(
+            leading:  IconButton(
+                onPressed: () =>  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(selectedIndex: 0)),(route)=>false),
+                icon: Icon(Icons.arrow_back_ios)),
               title: Text("목표 체크리스트", style: TextStyle(
                   fontSize: 20.sp, fontWeight: FontWeight.w500)),
           ),
@@ -41,14 +48,7 @@ class _TodosListScreenState extends State<TodosListScreen> {
                     children: [
                       Column(
                         children: [
-                          Row(children: [
-                            CategoryYearButton(
-                                name: "2021", lists: [], set: () {}),
-                            CategoryYearButton(
-                                name: "2022", lists: [], set: () {}),
-                            CategoryYearButton(
-                                name: "2023", lists: [], set: () {})
-                          ],),
+                          Row(children: category),
                           Expanded(child:
                           SingleChildScrollView(
                             controller: controller,
@@ -80,12 +80,14 @@ class _TodosListScreenState extends State<TodosListScreen> {
     });
   }
   set(){
-    initList();
+    initList(year);
   }
-  void initList() async {
+  void initList(String year) async {
      //실제 나타낼 데이터
-    List<dynamic> data = await GetTodos();
-    data.map((e) => todocheck[e['id']]=e['isChecked']); //데이터 체크여부 바꿔주기
+    List<dynamic> data = await GetTodos(year);
+    data.map((e) =>
+    todocheck[e['id']] = e['isChecked']
+    ); //데이터 체크여부 바꿔주기
     List<TodosCardInput> widgets = data.map((e) => //데이터 위젯리스트화하기
     TodosCardInput(
         isPatch: true,
@@ -118,5 +120,24 @@ class _TodosListScreenState extends State<TodosListScreen> {
         }
       }
     });
+  }
+
+  void getcategory() async {
+    List<dynamic> data = await GetYearCategory();
+    setState(() {
+      data.forEach((element) {
+        buttoncolor[element.toString()]=false;
+      });
+    });
+  }
+
+  List<Widget> makebuttons() {
+   List<Widget> list=[];
+   buttoncolor.forEach((key, value) {
+     list.add(
+       CategoryYearButton(name: key,set: set,)
+     );
+   });
+   return list;
   }
 }

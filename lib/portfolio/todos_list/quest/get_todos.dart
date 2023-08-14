@@ -7,12 +7,12 @@ import '../../../common/util.dart';
 import '../../../user/register/model/user_information.dart';
 
 //전체 목표 조회
-Future<dynamic> GetTodos() async {
+Future<dynamic> GetTodos(String? year) async {
   UserInformation user = await GetUserInformation();
   String accesstoken = user.accessToken;
   try {
     var response = await http.get(
-      Uri.parse('$urls/todos'),
+      Uri.parse('$urls/todos${year!=null?'/$year':''}'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'authorization': 'Bearer $accesstoken',
