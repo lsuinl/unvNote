@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-
 class TodosCardInput extends StatefulWidget {
+  final String? id;
   final String? name;
   final bool? isChecked;
   final VoidCallback? check;
@@ -11,6 +11,7 @@ class TodosCardInput extends StatefulWidget {
   final bool isPatch;
 
   const TodosCardInput({
+    this.id,
      this.name,
      this.isChecked,
      this.check,
@@ -33,7 +34,7 @@ class _TodosCardInputState extends State<TodosCardInput> {
 
   @override
   void initState() {
-      if(widget.isPatch) {
+      if(widget.isPatch==true) {
         setState(() {
           name.text = widget.name!;
           date.text = widget.date!;

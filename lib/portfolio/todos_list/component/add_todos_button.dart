@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class AddTodosButton extends StatelessWidget {
   final VoidCallback onPressed;
-
   const AddTodosButton({
     required this.onPressed,
     Key? key}) : super(key: key);

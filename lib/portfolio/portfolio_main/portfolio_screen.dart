@@ -9,7 +9,7 @@ import 'package:univ_note/portfolio/portfolio_main/component/move_todoslist_butt
 import 'package:univ_note/portfolio/portfolio_main/component/percent_view.dart';
 import 'package:univ_note/portfolio/portfolio_main/component/profile_card.dart';
 import 'package:univ_note/portfolio/portfolio_main/component/todos_card.dart';
-import 'package:univ_note/portfolio/portfolio_main/quest/get_todos.dart';
+import 'package:univ_note/portfolio/portfolio_main/quest/get_todos_only_true.dart';
 import 'package:univ_note/setting/setting_main/component/profile_button.dart';
 
 import '../../common/basic.dart';
@@ -86,7 +86,7 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
 
     setState(() {
       user=inuser;
-      if(list.length>0)todos= list;
+      if(list.length>0)todos = list;
     });
   }
 
