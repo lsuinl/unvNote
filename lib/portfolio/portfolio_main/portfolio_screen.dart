@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -23,10 +24,10 @@ class PortFolioScreen extends StatefulWidget {
   @override
   State<PortFolioScreen> createState() => _PortFolioScreenState();
 }
-late UserInformation user;
-List<Widget> todos=[Center(child: Text('설정한 목표가 없습니다'))];
+late UserInformation? user=null;
+late List<Widget> todos;
+Map<String,bool> isChecked={};
 class _PortFolioScreenState extends State<PortFolioScreen> {
-  bool isChecked=false;
   @override
   void initState() {
     loadingHome();
@@ -34,61 +35,75 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future:  GetUserInformation(),
-        builder:(context,snapshot){
-        if(snapshot.hasData) {
-          UserInformation user = snapshot.data!;
-          return Basic(
-              paddings: 10,
-              widgets: ListView(
-                  children: [
-                    ProFileCard(name: user.name,
-                        school: user.univ,
-                        major: user.department,
-                        end: user.expectedGraduationDate),
-                    SizedBox(height: 10.h),
-                    D_DayButton(name: CaculaterClass(user.classDday),clas: user.classDday,grad: false,state: state),
-                    SizedBox(height: 10.h),
-                    PercentView(percent: CaculaterPercent(SetStartAndPercent(user.classDday), user.classDday)),
-                    SizedBox(height: 10.h),
-                    D_DayButton(name: "졸업 🎓", clas: user.expectedGraduationDate,grad: true,state:state),
-                    SizedBox(height: 10.h),
-                    PercentView(percent: CaculaterPercent(user.admissionDate, user.expectedGraduationDate)),
-                    SizedBox(height: 10.h),
-                    Container(height: 2.h, color: Colors.black12),
-                    SizedBox(height: 10.h),
-                    MoveTodoListButton(),
-                    Column(
-                      children: todos,
-                    )
-                  ]
-              ));
-        }
-        else{
-          return CircularProgressIndicator();
-        }
-    });
+    if(user==null) {
+      return CircularProgressIndicator();
+    }
+    else
+      return Basic(
+          paddings: 10,
+          widgets: ListView(
+              children: [
+                ProFileCard(name: user!.name,
+                    school: user!.univ,
+                    major: user!.department,
+                    end: user!.expectedGraduationDate),
+                SizedBox(height: 10.h),
+                D_DayButton(name: CaculaterClass(user!.classDday),
+                    clas: user!.classDday,
+                    grad: false,
+                    state: state),
+                SizedBox(height: 10.h),
+                PercentView(percent: CaculaterPercent(
+                    SetStartAndPercent(user!.classDday), user!.classDday)),
+                SizedBox(height: 10.h),
+                D_DayButton(name: "졸업 🎓",
+                    clas: user!.expectedGraduationDate,
+                    grad: true,
+                    state: state),
+                SizedBox(height: 10.h),
+                PercentView(percent: CaculaterPercent(
+                    user!.admissionDate, user!.expectedGraduationDate)),
+                SizedBox(height: 10.h),
+                Container(height: 2.h, color: Colors.black12),
+                SizedBox(height: 10.h),
+                MoveTodoListButton(),
+                Column(
+                  children: todos ?? [Center(child: Text("설정된 목표가 없습니다."),)],
+                )
+              ]
+          ));
   }
   loadingHome() async {
     var inuser =await GetUserInformation();
     List<dynamic> intodos= await GetTodos();
-    List<Widget> list = intodos.map((e) => TodosCard(
-        id:e['id'],
-        name: e['content'],
-        isChecked: e['isChecked'],
-        check: (){},
-        date: e['year']
-    )).toList();
+    List<Widget> list= intodos.map((e) => e['isChecked']==false ? TodosCard(
+          id: e['id'],
+          name: e['content'],
+          isChecked: e['isChecked'],
+          check: state,
+          date: e['year'])
+            :Container()).toList();
 
     setState(() {
+      intodos.map((e) => isChecked[e['id']] = e['isChecked']);
       user=inuser;
       todos= list;
     });
   }
 
-  state(){
+  state() async {
+    List<dynamic> intodos= await GetTodos();
+    List<Widget> list= intodos.map((e) => e['isChecked']==false ? TodosCard(
+        id: e['id'],
+        name: e['content'],
+        isChecked: e['isChecked'],
+        check: state,
+        date: e['year'])
+        :Container()).toList();
+
     setState(() {
+      todos=list;
     });
+    print(todos);
   }
 }
