@@ -8,6 +8,7 @@ import 'package:univ_note/portfolio/portfolio_main/component/move_todoslist_butt
 import 'package:univ_note/portfolio/portfolio_main/component/percent_view.dart';
 import 'package:univ_note/portfolio/portfolio_main/component/profile_card.dart';
 import 'package:univ_note/portfolio/portfolio_main/component/todos_card.dart';
+import 'package:univ_note/portfolio/portfolio_main/quest/get_todos.dart';
 import 'package:univ_note/setting/setting_main/component/profile_button.dart';
 
 import '../../common/basic.dart';
@@ -22,11 +23,15 @@ class PortFolioScreen extends StatefulWidget {
   @override
   State<PortFolioScreen> createState() => _PortFolioScreenState();
 }
-
+late UserInformation user;
+List<Widget> todos=[Center(child: Text('설정한 목표가 없습니다'))];
 class _PortFolioScreenState extends State<PortFolioScreen> {
   bool isChecked=false;
-
-
+  @override
+  void initState() {
+    loadingHome();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -54,10 +59,9 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
                     Container(height: 2.h, color: Colors.black12),
                     SizedBox(height: 10.h),
                     MoveTodoListButton(),
-                    TodosCard(name: "안녕하세요",
-                      isChecked: isChecked,
-                      check: () {},
-                      date: "3학년 2학기",)
+                    Column(
+                      children: todos,
+                    )
                   ]
               ));
         }
@@ -66,6 +70,23 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
         }
     });
   }
+  loadingHome() async {
+    var inuser =await GetUserInformation();
+    List<dynamic> intodos= await GetTodos();
+    List<Widget> list = intodos.map((e) => TodosCard(
+        id:e['id'],
+        name: e['content'],
+        isChecked: e['isChecked'],
+        check: (){},
+        date: e['year']
+    )).toList();
+
+    setState(() {
+      user=inuser;
+      todos= list;
+    });
+  }
+
   state(){
     setState(() {
     });

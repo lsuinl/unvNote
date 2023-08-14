@@ -6,12 +6,14 @@ class TodosCard extends StatelessWidget {
   final bool isChecked;
   final VoidCallback check;
   final String date;
+  final String id;
 
   const TodosCard({
     required this.name,
     required this.isChecked,
     required this.check,
     required this.date,
+    required this.id,
     Key? key}) : super(key: key);
 
   @override

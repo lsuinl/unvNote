@@ -20,10 +20,9 @@ Future<dynamic> GetTodos() async {
     );
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
     if(response.statusCode==200){
-      // ResponseModel responsemodel = ResponseModel.fromJson(body);
-      // print(responsemodel);
-      print(body['data']);
-      return body['data'];
+      ResponseModel responsemodel = ResponseModel.fromJson(body);
+      print(responsemodel.data['todolist']);
+      return responsemodel.data['todolist'];
     }
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환
