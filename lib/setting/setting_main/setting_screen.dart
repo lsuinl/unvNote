@@ -18,16 +18,33 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> menuname=["개인/보안","알림설정","화면설정","테마","자주 묻는 질문","공지사항","기타","버전 확인"];
-    List<Widget> menu= menuname.map((e) => MenuButton(name: e)).toList();
-
-    return Basic(
-        paddings: 10,
-        widgets: ListView(
-            children: [
-              ProFileButton(),
-              Column(children: menu,)
-            ]
-        ));
+    List<String> menuname = [
+      "개인/보안",
+      "알림설정",
+      "화면설정",
+      "테마",
+      "자주 묻는 질문",
+      "공지사항",
+      "기타",
+      "버전 확인"
+    ];
+    List<Widget> menu = menuname.map((e) => MenuButton(name: e)).toList();
+    return FutureBuilder(
+        future: GetUserInformation(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+             UserInformation user = snapshot.data!;
+            return Basic(
+                paddings: 10,
+                widgets: ListView(
+                    children: [
+                      ProFileButton(name:user.name,school:user.univ,major:user.department,end:user.expectedGraduationDate),
+                      Column(children: menu,)
+                    ]
+                ));
+          }
+          else
+            return CircularProgressIndicator();
+        });
   }
 }
