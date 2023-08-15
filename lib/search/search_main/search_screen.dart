@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:univ_note/search/search_main/component/popular_card.dart';
 
 import '../../common/basic.dart';
 import '../search_detail/search_detail_screen.dart';
-import 'component/your_best_card.dart';
+import 'component/activity_card.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -31,11 +30,9 @@ class _SearchScreenState extends State<SearchScreen> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  YourBestCard(),
-                  SizedBox(width: 15.w,),
-                  YourBestCard(),
-                  SizedBox(width: 15.w,),
-                  YourBestCard(),
+                  ActivityCard(height: 150,width: 130,paddings: 14,),
+                  ActivityCard(height: 150,width: 130,paddings: 14,),
+                  ActivityCard(height: 150,width: 130,paddings: 14,),
                 ],
               ),
             ),
@@ -91,7 +88,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   shrinkWrap: true,
                   crossAxisCount: 2,
                   children: List.generate(4, (index) {
-                    return PopularCard();
+                    return ActivityCard(height: 120, width: 150,paddings: 14,);
                   })),
             ),
           ],
