@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: '포트폴리오'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: '대외활동'),
-          BottomNavigationBarItem(icon: Icon(Icons.content_paste), label: '기록'),
+          BottomNavigationBarItem(icon: Icon(Icons.content_paste,size: 22,), label: '기록',),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정')
         ],
         currentIndex: _selectedIndex,

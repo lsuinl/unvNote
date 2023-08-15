@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:univ_note/search/activity_detail/activity_deatil_screen.dart';
+
+import '../../search_detail/search_detail_screen.dart';
 
 class ActivityCard extends StatelessWidget {
   final int height;
@@ -14,7 +17,7 @@ class ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.symmetric(horizontal: paddings),
+    return Padding(padding: EdgeInsets.symmetric(horizontal: 14),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,7 +26,7 @@ class ActivityCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.r)),
             //elevation: 2, //그림자
             child: InkWell(
-              //onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => ())),
+              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityDeatilScreen())),
               child: Container(
                   height: height.h,
                   width: width.w,
