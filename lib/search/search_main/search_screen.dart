@@ -3,6 +3,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common/basic.dart';
+import '../search_detail/search_detail_screen.dart';
+import 'component/activity_card.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -10,154 +12,86 @@ class SearchScreen extends StatefulWidget {
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
-
+Map<String,bool> buttoncolor ={"대외활동":true,"공모전":false,"동아리":false};
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Basic(
-        paddings: 15,
-        widgets: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          TextFormField(
-            decoration: InputDecoration(
-                hintText: "원하는 활동을 검색해보세요.",
-                hintStyle: TextStyle(fontSize: 15.sp),
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10))),
-          ),
-          SizedBox(height: 5.h),
-          Text(
-            "추천 활동",
-            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.r)),
-                  elevation: 5, //그림자
-                  child: InkWell(
-                    //onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => ())),
-                    child: Container(
-                        height: 100.h,
-                        width: 250,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F7CaTC%2FbtrKLgJ4NJK%2FWKb4E5kkkK8vYzlUwWkoJk%2Fimg.jpg"),
-                          ),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        child: Stack(
-                          children: [
-                            Padding(padding:EdgeInsets.all(5),
-    child:  SizedBox(
-    child: Container(
-    decoration: BoxDecoration(
-      color: Color(0xFFB9D7F9),
-      borderRadius: BorderRadius.circular(5)
-    ),
-    child:Padding(
-    padding: EdgeInsets.symmetric(vertical: 5.h,horizontal: 20.w),
-      child:  Text(
-          "D-4",
-          style: TextStyle(color: Colors.white)
-      ),
-    )))
-    )
-                          ],
-                        )),
-                  )),
-              Text(
-                " [어쩌구] ㅇㅇ..",
-                style: TextStyle(fontSize: 14.sp)
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.blue),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0))
-                  ),
-                  child: Text(
-                    "대외활동",
-                    style: TextStyle(fontSize: 16.sp)
-                  )),
-              OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.blue),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                  ),
-                  child: Text("동아리", style: TextStyle(fontSize: 16.sp))),
-              OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.blue),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0))
-                  ),
-                  child: Text("공모전", style: TextStyle(fontSize: 16.sp)))
-            ],
-          ),
-          GridView.count(
-              childAspectRatio: (1 / .9),
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              children: List.generate(4, (index) {
-                return   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                    Card(
-                    shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.r)),
-                elevation: 5, //그림자
-                child: InkWell(
-                //onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => ())),
-                child: Container(
-                height: 100.h,
-                width: 250,
-                decoration: BoxDecoration(
-                image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F7CaTC%2FbtrKLgJ4NJK%2FWKb4E5kkkK8vYzlUwWkoJk%2Fimg.jpg"),
-                ),
-                borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Stack(
+        paddings: 0,
+        widgets: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+                padding: EdgeInsets.all(15),
+                child: Text("맞춤 추천 활동",
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600))),
+            Container(
+              height: 180.h,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
                 children: [
-                Padding(padding:EdgeInsets.all(5),
-                child:  SizedBox(
-                child: Container(
-                decoration: BoxDecoration(
-                color: Color(0xFFB9D7F9),
-                borderRadius: BorderRadius.circular(5)
-                ),
-                child:Padding(
-                padding: EdgeInsets.symmetric(vertical: 5.h,horizontal: 20.w),
-                child:  Text(
-                "D-4",
-                style: TextStyle(color: Colors.white)
-                ),
-                )))
-                )
+                  ActivityCard(height: 150,width: 130,paddings: 14,),
+                  ActivityCard(height: 150,width: 130,paddings: 14,),
+                  ActivityCard(height: 150,width: 130,paddings: 14,),
                 ],
-                )),
-                )),
-                Text(
-                " [어쩌구] ㅇㅇ..",
-                style: TextStyle(fontSize: 14.sp)
-                )
-                ],);})
-          )]));
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              color: Color(0xFFE8F2FD),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                      onPressed: () {},
+                      child: Text("대외활동", style:TextStyle(fontSize: 16.sp,color: Color(0xFF1C7DEC), decoration: TextDecoration.underline,))),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text("동아리", style: TextStyle(fontSize: 16.sp,color: Colors.black87))),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text("공모전", style: TextStyle(fontSize: 16.sp,color: Colors.black87)))
+                ],
+              ),
+            ),
+            Container(
+              height: 25.h,
+              child: Row(
+                children: [
+                  Expanded(child: Container()),
+                  ElevatedButton(
+                    onPressed: () => Navigator.push(context,
+    MaterialPageRoute(builder: (context) => SearchDeatilScreen())),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      elevation: 0,
+                      splashFactory: InkSparkle.splashFactory
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+    Text('더보기', style: TextStyle(color: Colors.grey),),
+    Icon(
+    Icons.arrow_right_sharp,
+    color: Colors.grey,
+    ),
+                      ],
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+            Expanded(
+              child: GridView.count(
+                  childAspectRatio: 1.1,
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  children: List.generate(4, (index) {
+                    return ActivityCard(height: 120, width: 150,paddings: 14,);
+                  })),
+            ),
+          ],
+        ));
   }
 }

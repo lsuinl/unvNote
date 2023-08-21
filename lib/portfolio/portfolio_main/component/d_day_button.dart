@@ -4,6 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:univ_note/portfolio/portfolio_main/common/caculater_d_day.dart';
+import 'package:univ_note/portfolio/portfolio_main/quest/patch_dates_graduate.dart';
+import 'package:univ_note/portfolio/portfolio_main/quest/patch_dates_schedule.dart';
+
+import '../common/find_start_or_end.dart';
 
 class D_DayButton extends StatelessWidget {
   final String name;
@@ -38,12 +42,15 @@ class D_DayButton extends StatelessWidget {
                     maximumDate: DateTime(2035, 03, 31,),
                     onDateTimeChanged: (DateTime date) async {
                       SharedPreferences prefs = await SharedPreferences.getInstance();
+                      String setdate=date.toString().substring(0,10);
                      if(grad==true){
                        //데이터 전송 api(졸업)
-                       prefs.setString("expectedGraduationDate", date.toString().substring(0,10));
+                       PatchDatesGraduate(setdate);
+                       prefs.setString("expectedGraduationDate", setdate);
                      }
                      else{
                        //데이터 전송 api (종/개강)
+                       PatchDatesSchedule(CaculaterClass(setdate).substring(1,2), setdate);
                        prefs.setString("Class_D_day", date.toString().substring(0,10));
                      }
                      state();

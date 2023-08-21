@@ -15,7 +15,7 @@ class MoveTodoListButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-          Text("목표 체크리스트",style: TextStyle(color: Colors.black, fontSize: 28.sp, fontWeight: FontWeight.w700)),
+          Text("목표 체크리스트",style: TextStyle(color: Colors.black, fontSize: 24.sp, fontWeight: FontWeight.w700)),
           Icon(Icons.arrow_forward_ios,color: Colors.black12,
             shadows: [
               Shadow(

@@ -34,10 +34,10 @@ class ProFileCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name,style: TextStyle(fontSize: 24.sp,color: Colors.white, fontWeight: FontWeight.w600)),
-                  Text(school,style: TextStyle(fontSize: 16.sp,color: Colors.white, fontWeight: FontWeight.w400)),
-                  Text(major,style: TextStyle(fontSize: 16.sp,color: Colors.white, fontWeight: FontWeight.w400)),
-                  Text(CaculaterDate(end),style: TextStyle(fontSize: 16.sp,color: Colors.white, fontWeight: FontWeight.w400))
+                  Text(name,style: TextStyle(fontSize: 22.sp,color: Colors.white, fontWeight: FontWeight.w600)),
+                  Text(school,style: TextStyle(fontSize: 14.sp,color: Colors.white, fontWeight: FontWeight.w400)),
+                  Text(major,style: TextStyle(fontSize: 14.sp,color: Colors.white, fontWeight: FontWeight.w400)),
+                  Text(CaculaterDate(end),style: TextStyle(fontSize: 14.sp,color: Colors.white, fontWeight: FontWeight.w400))
                 ],
               )
             ],
