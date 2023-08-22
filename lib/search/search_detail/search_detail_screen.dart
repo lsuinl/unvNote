@@ -34,7 +34,7 @@ class _SearchDeatilScreenState extends State<SearchDeatilScreen> {
               suffixIcon: IconButton(
                   onPressed: ()=>controller.clear(),
                   icon:Icon(Icons.cancel)),
-              hintText: "원하는 활동을 검색해보세요.",),
+              hintText: "원하는 활동을 검색해보세요."),
           ),
           Flexible(
              child: GridView.count(
@@ -42,7 +42,8 @@ class _SearchDeatilScreenState extends State<SearchDeatilScreen> {
     shrinkWrap: true,
     crossAxisCount: 2,
     children: List.generate(10, (index) {
-    return ActivityCard(height: 180, width: 170,paddings:6,);
+      return CircularProgressIndicator();
+ //   return ActivityCard(height: 180, width: 170,paddings:6,);
     })),
           )
         ],
