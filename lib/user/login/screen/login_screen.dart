@@ -5,6 +5,7 @@ import 'package:univ_note/user/login/quest/post_login.dart';
 import 'package:univ_note/user/register/screen/input_1email_screen.dart';
 
 import '../../../home/home/home_screen.dart';
+import '../../../search/get_activities_recommend_save.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -53,6 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                   }
                   else {
+                    GetActivitesRecommentSave();
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (BuildContext context) => new HomeScreen(selectedIndex: 0)));
                   }

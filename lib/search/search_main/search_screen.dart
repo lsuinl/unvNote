@@ -64,7 +64,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             setState(() {
                               type="대외활동";
                             });
-                            initGetActivities(type);
                           },
                           child: Text("대외활동", style: TextStyle(fontSize: 16.sp,
                             color: Color(0xFF1C7DEC),
@@ -74,7 +73,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             setState(() {
                               type="동아리";
                             });
-                            initGetActivities(type);
                           },
                           child: Text("동아리", style: TextStyle(fontSize: 16.sp,
                               color: Colors.black87))),
@@ -99,7 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         onPressed: () =>
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) =>
-                                    SearchDeatilScreen())),
+                                    SearchDeatilScreen(type: type,))),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             elevation: 0,
@@ -124,12 +122,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       childAspectRatio: 1.1,
                       shrinkWrap: true,
                       crossAxisCount: 2,
-                      children: List.generate(4, (index) {
-                        return CircularProgressIndicator();
-                      }
-                       //  return ActivityCard(height: 120, width: 150,paddings: 14,);
+                      children: BestCards
                       )),
-                ),
               ],
             );
           }
@@ -155,8 +149,8 @@ class _SearchScreenState extends State<SearchScreen> {
     List<dynamic> data = await GetActivitiesBest(types);
     BestCards = await data.map(
             (e) => ActivityCard(
-              height: 150,
-              width: 130,
+              height: 120,
+              width: 150,
               paddings: 14,
               id: e['id'],
               image_url: e['image_url'],
