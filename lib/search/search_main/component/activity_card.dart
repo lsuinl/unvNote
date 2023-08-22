@@ -26,7 +26,7 @@ class ActivityCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.r)),
             //elevation: 2, //그림자
             child: InkWell(
-              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityDeatilScreen())),
+              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityDeatilScreen(id:"아이디"))),
               child: Container(
                   height: height.h,
                   width: width.w,

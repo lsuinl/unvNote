@@ -7,7 +7,7 @@ import '../../../common/util.dart';
 import '../../../user/register/model/user_information.dart';
 
 //상세 공모전 조회하기
-Future<dynamic> GetActivities(String id) async {
+Future<dynamic> GetActivitiesId(String id) async {
   UserInformation user = await GetUserInformation();
   String accesstoken = user.accessToken;
   try {
