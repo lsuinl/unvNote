@@ -10,6 +10,12 @@ import '../../../user/register/model/user_information.dart';
 Future<dynamic> GetActivitiesBest(String type) async {
   UserInformation user = await GetUserInformation();
   String accesstoken = user.accessToken;
+  // if(type=="대외활동")
+  //   type = 'activity';
+  //   else if(type=="동아리")
+  //   type = 'club';
+  //   else
+  // type = 'contest';
   try {
     var response = await http.get(
       Uri.parse('$urls/activities/best/$type'),
@@ -20,10 +26,10 @@ Future<dynamic> GetActivitiesBest(String type) async {
 
     );
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
+    print(body);
     if(response.statusCode==200){
       ResponseModel responsemodel = ResponseModel.fromJson(body);
-      // print(responsemodel.data['todolist']);
-      return responsemodel.data['todolist'];
+      return responsemodel.data['activities'];
     }
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환

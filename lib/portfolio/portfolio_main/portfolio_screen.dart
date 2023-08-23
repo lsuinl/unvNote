@@ -24,15 +24,16 @@ class PortFolioScreen extends StatefulWidget {
   State<PortFolioScreen> createState() => _PortFolioScreenState();
 }
 late UserInformation? user=null;
-List<Widget> todos= [
-  Container(
-    height: 100.h,
-  child: Center(child: Text("설정된 목표가 없습니다.")))];
+List<Widget> todos= [];
 class _PortFolioScreenState extends State<PortFolioScreen> {
   @override
   void initState() {
+    todos=[ Container(
+        height: 100.h,
+        child: Center(child: Text("설정된 목표가 없습니다.")))];
     loadingHome();
     super.initState();
+
   }
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
                 PercentView(percent: CaculaterPercent(
                     SetStartAndPercent(user!.classDday), user!.classDday)),
                 SizedBox(height: 10.h),
-                D_DayButton(name: "졸업 🎓",
+                D_DayButton(name: " 졸업 🎓",
                     clas: user!.expectedGraduationDate,
                     grad: true,
                     state: state),
@@ -92,6 +93,7 @@ class _PortFolioScreenState extends State<PortFolioScreen> {
 
   state() async {
     List<dynamic> intodos= await GetTodosTrue();
+    loadingHome();
     List<Widget> list= intodos.map((e) => TodosCard(
         id: e['id'],
         name: e['content'],

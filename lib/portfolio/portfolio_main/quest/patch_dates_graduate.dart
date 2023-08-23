@@ -19,7 +19,7 @@ Future<dynamic> PatchDatesGraduate(String date) async {
       },
       body: jsonEncode({
         "schedule": "졸업",
-        "yupdateDate": date
+        "updateDate": date
       }),
     );
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));

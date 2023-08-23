@@ -50,14 +50,14 @@ class D_DayButton extends StatelessWidget {
                      }
                      else{
                        //데이터 전송 api (종/개강)
-                       PatchDatesSchedule(CaculaterClass(setdate).substring(1,2), setdate);
+                       PatchDatesSchedule(CaculaterClass(setdate).substring(1,3), setdate);
                        prefs.setString("Class_D_day", date.toString().substring(0,10));
                      }
-                     state();
+                      number=CaculaterEnd(setdate);
                     }, //날짜나 시간이 바뀌었을 때,
                   )),
             );
-        },);},
+        },).then((value) => state());},
         style: ElevatedButton.styleFrom(
             minimumSize: Size(100.w, 60.h),
             primary: Colors.white,

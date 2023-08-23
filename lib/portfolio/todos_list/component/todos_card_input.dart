@@ -33,17 +33,19 @@ class _TodosCardInputState extends State<TodosCardInput> {
   String errorString = "";
   FocusNode textFocus = FocusNode();
   FocusNode numberFocus=FocusNode();
-
+  bool check =false;
   @override
   void initState() {
       if(widget.isPatch==true) {
         setState(() {
           name.text = widget.name!;
           date.text = widget.date!;
+          check = widget.isChecked!;
         });
       }
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -73,7 +75,6 @@ class _TodosCardInputState extends State<TodosCardInput> {
                         border: OutlineInputBorder(borderSide: BorderSide.none),
                         hintStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 22.sp),
                       ),
-                  //    onTapOutside: (e)=>PostOrPatch(),
                       onEditingComplete:()=>PostOrPatch(),
                       onSubmitted: (e)=>PostOrPatch(),
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22.sp),
@@ -87,11 +88,12 @@ class _TodosCardInputState extends State<TodosCardInput> {
                                 color:Colors.black12
                             ),
                             shape: CircleBorder(),
-                            value: todocheck[widget.id]??false,
+                            value: check,
                             onChanged: (val){
                               setState(() {
                                 print(val);
                                 if(widget.isPatch==true) {
+                                  check=val!;
                                   todocheck[widget.id!] = val!;
                                   PatchTodosCheckId(widget.id!);
                                 }

@@ -28,8 +28,12 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(padding: EdgeInsets.symmetric(horizontal: 100.w),
-              child:Image.network("https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F7CaTC%2FbtrKLgJ4NJK%2FWKb4E5kkkK8vYzlUwWkoJk%2Fimg.jpg",width: 150.h),),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 60.w),
+              child:Container(height: 200.h, width:300.w,
+                  child:
+              Image.asset("assets/images/logo.png",fit: BoxFit.cover ,))
+              ),
+    SizedBox(height: 20.h),
     Text("이메일",style: TextStyle(fontSize:15.sp)),
             inputtext('이메일을 입력해주세요',Idcontroller),
             SizedBox(height: 20.h),

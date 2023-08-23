@@ -19,10 +19,10 @@ Future<dynamic> GetActivitiesRecommend() async {
       },
     );
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
+    print(body);
     if(response.statusCode==200){
       ResponseModel responsemodel = ResponseModel.fromJson(body);
-      // print(responsemodel.data['todolist']);
-      return responsemodel.data['todolist'];
+      return responsemodel.data['activities'];
     }
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환

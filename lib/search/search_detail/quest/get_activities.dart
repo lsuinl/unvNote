@@ -19,6 +19,7 @@ Future<dynamic> GetActivities(String type, int page) async {
       },
     );
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
+    print(body);
     if(response.statusCode==200){
       ResponseModel responsemodel = ResponseModel.fromJson(body);
       // print(responsemodel.data['todolist']);

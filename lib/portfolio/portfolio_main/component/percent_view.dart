@@ -17,7 +17,7 @@ class PercentView extends StatelessWidget {
         Row(
           children: [
             SizedBox(width: MediaQuery.of(context).size.width/123*(percents*100)),
-            Icon(Icons.run_circle,size: 50.r,color: Colors.blue,),
+            Icon(Icons.sailing,size: 50.r,color: Colors.blue,),
           ],
         ),
         LinearPercentIndicator(

@@ -1,2 +1,2 @@
-final String urls="http://13.124.218.94:3000";
+final String urls="http://43.202.35.234:3000";
 final String schoolUrls="http://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=66ece993b4c36e3571202488d7a7e36a&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list&sch1=100323&sch2=100328&perPage=100&searchSchulNm=";
