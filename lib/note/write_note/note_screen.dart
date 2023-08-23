@@ -66,6 +66,7 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
         appBar: AppBar(
             automaticallyImplyLeading:false,
         leading: IconButton(onPressed: ()=>Navigator.pop(context), icon: Icon(Icons.close)),
+          title: Text("기록하기", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500)),
         actions: [
           TextButton(onPressed: () async {
             if(category=="") seterrorstring("카테고리를 선택해주세요");
@@ -89,7 +90,6 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
             }
             },
             child: Text("완료",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600, color: Colors.white),))],
-        title: Text("기록하기", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500))
     ),
     body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ActivityDetailCard extends StatelessWidget {
   final String dday;
@@ -32,30 +33,32 @@ class ActivityDetailCard extends StatelessWidget {
                       ),
                       child: Stack(
                         children: [
-                          Padding(padding:EdgeInsets.all(5),
-                              child:  SizedBox(
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFF6495ED),
-                                          borderRadius: BorderRadius.circular(8)
-                                      ),
-                                      child:Padding(
-                                        padding: EdgeInsets.symmetric(vertical: 5.h,horizontal: 35.w),
-                                        child:  Text(
-                                            dday,
-                                            style: TextStyle(fontSize: 18.sp, color: Colors.white,fontWeight: FontWeight.w500)
-                                        ),
-                                      )))
-                          )
                         ],
                       )),
                 ),
+            Padding(padding:EdgeInsets.all(5),
+                child:  SizedBox(
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFF1472DF),
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        child:Padding(
+                          padding: EdgeInsets.symmetric(vertical: 5.h,horizontal: 35.w),
+                          child:  Text(
+                              dday,
+                              style: TextStyle(fontSize: 18.sp, color: Colors.white,fontWeight: FontWeight.w500)
+                          ),
+                        )))
+            ),
             Container(
               alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.all(12),
               child: Text(
               title,
-                  style: TextStyle(fontSize: 24.sp),
-              )
+                  style: GoogleFonts.nanumGothic(fontSize: 20.sp,fontWeight: FontWeight.w600),
+              ))
             ),
           ],
         );

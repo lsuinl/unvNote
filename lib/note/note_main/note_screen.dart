@@ -24,7 +24,8 @@ Map<String,bool> buttoncolor ={"전체보기":true};
 class _NoteScreenState extends State<NoteScreen> {
   @override
   void initState() {
-
+    buttoncolor ={"전체보기":true};
+    list=[];
     super.initState();
   }
 

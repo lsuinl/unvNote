@@ -36,7 +36,6 @@ class NoteDeatilScreen extends StatelessWidget {
             else if(snapshot.data==404) return Center(child: Text("데이터를 불러오는 데 문제가 발생했습니다."));
             else{
               dynamic data= snapshot.data;
-              print(data);
             return Padding(
               padding: EdgeInsets.all(16),
               child: Column(

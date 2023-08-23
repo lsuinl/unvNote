@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:univ_note/common/basic_appbar.dart';
 import 'package:univ_note/search/activity_detail/quest/get_activiies_id.dart';
 import 'package:univ_note/search/search_main/component/activity_card.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../common/basic.dart';
 import 'component/activity_detail_card.dart';
 import 'component/review_card.dart';
 
@@ -19,11 +21,10 @@ class ActivityDeatilScreen extends StatelessWidget {
         padding: 0,
         name: "상세정보",
       widgets: FutureBuilder(
-       // future:GetActivitiesId(id),
+       future:GetActivitiesId(id),
       builder: (context, snapshot){
         if(snapshot.hasData) {
-         // var data = snapshot.data!;
-          Map<String, dynamic> data={};
+         var data = snapshot.data!;
           var activity=data['activity'];
           List<dynamic> reviews = data['reviews'];
 
@@ -45,22 +46,32 @@ class ActivityDeatilScreen extends StatelessWidget {
                     image_url: activity['image_url'],
                     title: activity['title']
                 ),
-                Padding(padding: EdgeInsets.all(15),
-                    child: Text("링크", style: TextStyle(fontSize: 18.sp),)),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 5),
+                child:
+                TextButton(
+                  onPressed: () async {
+                    await launch(activity['link'], forceWebView: true, forceSafariVC: true);
+                  },
+                    child:Text(activity['link']))),
                 Container(height: 4.h, color: Color(0xFFD9D9D9),),
                 Padding(padding: EdgeInsets.all(15),
                     child: Text("활동 후기", textAlign: TextAlign.left,
                       style: TextStyle(
                           fontSize: 24.sp, fontWeight: FontWeight.w600),)),
-                Column(
-                  children: review,
-                )
+            Padding(padding: EdgeInsets.symmetric(horizontal: 10),child:Column(
+                  children: review.length==0 ? [Center(child:Text("작성된 후기가 없습니다."))]:review,
+                ))
               ],
             ),
           );
         }
         else
-          return CircularProgressIndicator();
+          return  Basic(
+              paddings: 10,
+              widgets: Center(
+                  child:CircularProgressIndicator()
+              )
+          );
   }));
 }
 }

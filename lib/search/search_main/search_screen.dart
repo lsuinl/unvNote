@@ -65,17 +65,19 @@ class _SearchScreenState extends State<SearchScreen> {
                               type="대외활동";
                             });
                           },
-                          child: Text("대외활동", style: TextStyle(fontSize: 16.sp,
-                            color: Color(0xFF1C7DEC),
-                            decoration: TextDecoration.underline,))),
+                          child: Text("대외활동", style: buttonColor["대외활동"] == true ?
+          TextStyle(fontSize: 16.sp,color: Color(0xFF1C7DEC),decoration: TextDecoration.underline)
+              : TextStyle(fontSize: 16.sp,color: Colors.black87),
+                            )),
                       TextButton(
                           onPressed: (){
                             setState(() {
                               type="동아리";
                             });
                           },
-                          child: Text("동아리", style: TextStyle(fontSize: 16.sp,
-                              color: Colors.black87))),
+                          child: Text("동아리", style: buttonColor["동아리"] ==true ?
+                          TextStyle(fontSize: 16.sp,color: Color(0xFF1C7DEC),decoration: TextDecoration.underline,)
+                              : TextStyle(fontSize: 16.sp,color: Colors.black87),)),
                       TextButton(
                           onPressed: (){
                             setState(() {
@@ -83,8 +85,9 @@ class _SearchScreenState extends State<SearchScreen> {
                             });
                             initGetActivities(type);
                           },
-                          child: Text("공모전", style: TextStyle(fontSize: 16.sp,
-                              color: Colors.black87)))
+                          child: Text("공모전", style: buttonColor["공모전"] ==true ?
+                          TextStyle(fontSize: 16.sp,color: Color(0xFF1C7DEC),decoration: TextDecoration.underline,)
+                              : TextStyle(fontSize: 16.sp,color: Colors.black87),))
                     ],
                   ),
                 ),
@@ -119,7 +122,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 Expanded(
                   child: GridView.count(
-                      childAspectRatio: 1.1,
+                      childAspectRatio: 1,
                       shrinkWrap: true,
                       crossAxisCount: 2,
                       children: BestCards
@@ -128,7 +131,13 @@ class _SearchScreenState extends State<SearchScreen> {
             );
           }
           else
-            return CircularProgressIndicator();
+           return  Basic(
+              paddings: 10,
+              widgets: Center(
+                  child:CircularProgressIndicator()
+              )
+           );
+
         }));
   }
   Future<bool> initGetActivities(String types) async {

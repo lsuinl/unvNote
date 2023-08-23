@@ -25,17 +25,15 @@ class ReviewCard extends StatelessWidget {
             elevation: 3, //그림자
             child: InkWell(
               onTap: () async {
-                if (await canLaunchUrl(Uri.https(link))) {
-                  await launchUrl(Uri.https(link));
-                } else {
-                  throw 'Could not launch $link';
-                }
+                await launch(link, forceWebView: true, forceSafariVC: true);
               },
               child: Container(
                   height: 75.h,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    border: Border.all(),
+                    border: Border.all(
+                      color: Colors.black54
+                    ),
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: Padding(

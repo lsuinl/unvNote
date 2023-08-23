@@ -63,10 +63,14 @@ class ActivityCard extends StatelessWidget {
                     ],
                   )),
             )),
-        Text(
+        Container(
+          width: (width+30).toDouble(),
+          child:Text(
             title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 14.sp)
-        )
+        ))
       ],
     ));
   }

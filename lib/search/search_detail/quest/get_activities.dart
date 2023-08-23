@@ -12,18 +12,17 @@ Future<dynamic> GetActivities(String type, int page) async {
   String accesstoken = user.accessToken;
   try {
     var response = await http.get(
-      Uri.parse('$urls/activites/$type/$page'),
+      Uri.parse('$urls/activities?type=$type&page=$page'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'authorization': 'Bearer $accesstoken',
       },
     );
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
-    print(body);
     if(response.statusCode==200){
+      print(body);
       ResponseModel responsemodel = ResponseModel.fromJson(body);
-      // print(responsemodel.data['todolist']);
-      return responsemodel.data['todolist'];
+      return responsemodel.data;
     }
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환

@@ -10,9 +10,10 @@ import '../../../user/register/model/user_information.dart';
 Future<dynamic> GetActivitiesId(String id) async {
   UserInformation user = await GetUserInformation();
   String accesstoken = user.accessToken;
+  print('$urls/activities/detail/$id');
   try {
     var response = await http.get(
-      Uri.parse('$urls/activites/$id'),
+      Uri.parse('$urls/activities/detail/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'authorization': 'Bearer $accesstoken',
@@ -22,7 +23,7 @@ Future<dynamic> GetActivitiesId(String id) async {
     print(body);
     if(response.statusCode==200){
       ResponseModel responsemodel = ResponseModel.fromJson(body);
-      return responsemodel.data['todolist'];
+      return responsemodel.data;
     }
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환

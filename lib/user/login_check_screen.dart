@@ -20,13 +20,11 @@ class LoginCheckScreen extends StatelessWidget {
         builder:(context, snapshot) {
         if(snapshot.hasData) {
           if (snapshot.data == 200)
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                  builder: (context) => HomeScreen(selectedIndex: 0)), (
-                  route) => false);
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => HomeScreen(selectedIndex: 0)));
           else
-            Navigator.pushAndRemoveUntil(context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()), (
-                      route) => false);
+            Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
         }
       return Basic(
           paddings: 10,

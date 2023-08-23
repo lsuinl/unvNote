@@ -18,12 +18,11 @@ Future<dynamic> GetActivitiesBest(String type) async {
   // type = 'contest';
   try {
     var response = await http.get(
-      Uri.parse('$urls/activities/best/$type'),
+      Uri.parse('$urls/activities/best?type=$type'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'authorization': 'Bearer $accesstoken',
       },
-
     );
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
     print(body);

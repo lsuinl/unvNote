@@ -12,7 +12,7 @@ Future<dynamic> GetActivitiesSearch(String type, int page, String keyword) async
   String accesstoken = user.accessToken;
   try {
     var response = await http.get(
-      Uri.parse('$urls/activities/search/$type/$keyword/$page'),
+      Uri.parse('$urls/activities/search?type=$type&keyword=$keyword&page=$page'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'authorization': 'Bearer $accesstoken',
@@ -22,8 +22,7 @@ Future<dynamic> GetActivitiesSearch(String type, int page, String keyword) async
     print(body);
     if(response.statusCode==200){
       ResponseModel responsemodel = ResponseModel.fromJson(body);
-      // print(responsemodel.data['todolist']);
-      return responsemodel.data['activities'];
+      return responsemodel.data;
     }
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환
