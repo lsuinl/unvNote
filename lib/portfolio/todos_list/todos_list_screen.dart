@@ -24,6 +24,10 @@ class _TodosListScreenState extends State<TodosListScreen> {
 
   @override
   void initState() {
+    buttoncolor ={"전체보기":true};
+    todocheck ={};
+    year="";
+    list=[];
     initList(year);
     getcategory();
     super.initState();
@@ -31,6 +35,7 @@ class _TodosListScreenState extends State<TodosListScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> category=makebuttons();
+    getcategory();
     if(list.length>0) {
       return Scaffold(
           appBar: AppBar(
@@ -66,7 +71,9 @@ class _TodosListScreenState extends State<TodosListScreen> {
               )));
     }
     else
-     return CircularProgressIndicator();
+     return Scaffold(
+       body: Center(child:CircularProgressIndicator()),
+     );
   }
 
   //투두 생성하기
@@ -79,9 +86,11 @@ class _TodosListScreenState extends State<TodosListScreen> {
       controller.animateTo(controller.position.maxScrollExtent, duration: Duration(seconds:1), curve: Curves.fastOutSlowIn,);
     });
   }
+
   set(){
     initList(year);
   }
+
   void initList(String year) async {
      //실제 나타낼 데이터
     List<dynamic> data = await GetTodos(year);
@@ -98,7 +107,10 @@ class _TodosListScreenState extends State<TodosListScreen> {
         date: e['year'])).toList();
     setState(() {
       if(data.length==0)
-        list=[Center(child:Text("작성된 목록이 없습니다"))];
+        list=[
+      Column( // 세로 컬럼 생성
+      mainAxisAlignment: MainAxisAlignment.center, // 새로축 가운데 정렬
+        children:[  Center(child:Text("작성된 목록이 없습니다"))])];
       else {
         list=[];
         for (int i = 0; i < data.length; i++) {
@@ -112,6 +124,11 @@ class _TodosListScreenState extends State<TodosListScreen> {
                      setState(() {
                        widgets.removeAt(i);
                        list.removeAt(i);
+                       if(list.length==0){
+                         list=[ Column( // 세로 컬럼 생성
+                             mainAxisAlignment: MainAxisAlignment.center, // 새로축 가운데 정렬
+                             children:[  Center(child:Text("작성된 목록이 없습니다"))])];
+                       }
                      });
                     },
                     color: Colors.red),
@@ -126,11 +143,15 @@ class _TodosListScreenState extends State<TodosListScreen> {
     List<dynamic> data = await GetYearCategory();
     setState(() {
       data.forEach((element) {
-        buttoncolor[element.toString()]=false;
+        if(buttoncolor[element.toString()]==true)
+          print("이거선택");
+        else
+          buttoncolor[element.toString()]=false;
       });
     });
   }
 
+  //카테고리 버튼 만들기
   List<Widget> makebuttons() {
    List<Widget> list=[];
    buttoncolor.forEach((key, value) {

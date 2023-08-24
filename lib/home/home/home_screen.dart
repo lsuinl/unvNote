@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:univ_note/portfolio/portfolio_main/portfolio_screen.dart';
 import 'package:univ_note/search/search_main/search_screen.dart';
 import 'package:univ_note/setting/setting_main/setting_screen.dart';
@@ -50,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           alignment: Alignment.centerLeft,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.h),
-              child:  Text('대학생 수첩', style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),),
+              child:  Text('🛥️Voyage', style: GoogleFonts.gluten(fontSize: 26.sp, fontWeight: FontWeight.w600),),
             )
         )
       ),
@@ -59,8 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: '포트폴리오'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: '대외활동'),
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: '메인화면'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: '활동추천'),
           BottomNavigationBarItem(icon: Icon(Icons.content_paste,size: 22,), label: '기록',),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정')
         ],

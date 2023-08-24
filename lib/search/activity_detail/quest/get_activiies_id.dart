@@ -6,31 +6,25 @@ import '../../../common/urls.dart';
 import '../../../common/util.dart';
 import '../../../user/register/model/user_information.dart';
 
-//졸업날짜 수정
-Future<dynamic> PatchDatesGraduate(String date) async {
+//상세 공모전 조회하기
+Future<dynamic> GetActivitiesId(String id) async {
   UserInformation user = await GetUserInformation();
   String accesstoken = user.accessToken;
+  print('$urls/activities/detail/$id');
   try {
-    var response = await http.patch(
-      Uri.parse('$urls/dates/graduate'),
+    var response = await http.get(
+      Uri.parse('$urls/activities/detail/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'authorization': 'Bearer $accesstoken',
       },
-      body: jsonEncode({
-        "schedule": "졸업",
-        "updateDate": date
-      }),
     );
     dynamic body =  jsonDecode(utf8.decode(response.bodyBytes));
     print(body);
-    if(response.statusCode==201){
+    if(response.statusCode==200){
       ResponseModel responsemodel = ResponseModel.fromJson(body);
-      print(responsemodel);
-      print(body['data']);
-      return body['data'];
+      return responsemodel.data;
     }
-
     ResponseErrorModel responsemodel = ResponseErrorModel.fromJson(body);
     //에러반환
     return responsemodel.statusCode;

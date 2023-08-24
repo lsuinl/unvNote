@@ -35,7 +35,6 @@ class _CategoryYearButtonState extends State<CategoryYearButton> {
               year=widget.name;
           });
           widget.set();
-          print("불러옴");
         },
         label: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),

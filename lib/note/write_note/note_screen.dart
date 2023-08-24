@@ -66,6 +66,7 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
         appBar: AppBar(
             automaticallyImplyLeading:false,
         leading: IconButton(onPressed: ()=>Navigator.pop(context), icon: Icon(Icons.close)),
+          title: Text("기록하기", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500)),
         actions: [
           TextButton(onPressed: () async {
             if(category=="") seterrorstring("카테고리를 선택해주세요");
@@ -89,7 +90,6 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
             }
             },
             child: Text("완료",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600, color: Colors.white),))],
-        title: Text("기록하기", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500))
     ),
     body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,8 +109,8 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
                   barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      contentPadding: EdgeInsets.zero,
                         elevation: 0,
+                        title: Center(child: Text("카테고리 선택")),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                           side: BorderSide(color: Colors.black26),
@@ -126,21 +126,6 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Flexible(
-                              fit:FlexFit.tight,
-                              child:Stack(
-                                alignment: Alignment.centerLeft,
-                        children: [
-                          Padding(padding: EdgeInsets.all(5),
-                          child:  IconButton(padding: EdgeInsets.zero,  constraints: BoxConstraints(),onPressed: ()=>Navigator.pop(context), icon: Icon(Icons.close,size:22.r),color: Colors.black26,)
-                      ),
-                         Container(
-                            alignment: Alignment.center,
-                            child: Text( "카테고리 선택",style: TextStyle(fontSize: 19.sp,fontWeight: FontWeight.w600))
-                          ),
-                        ]
-                          ),),
-                            Container(height: 2,color: Colors.black12),
                             TextButton(
                               style: TextButton.styleFrom(
                                 alignment: Alignment.centerLeft,

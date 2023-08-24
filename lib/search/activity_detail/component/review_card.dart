@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard({Key? key}) : super(key: key);
+  final String title;
+  final String text;
+  final String date;
+  final String link;
+
+  const ReviewCard({
+    required this.title,
+    required this.text,
+    required this.date,
+    required this.link,
+    Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +24,16 @@ class ReviewCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.r)),
             elevation: 3, //그림자
             child: InkWell(
-              onTap: () {
-                //링크로이동
-    },
+              onTap: () async {
+                await launch(link, forceWebView: true, forceSafariVC: true);
+              },
               child: Container(
                   height: 75.h,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    border: Border.all(),
+                    border: Border.all(
+                      color: Colors.black54
+                    ),
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: Padding(
@@ -33,7 +46,7 @@ class ReviewCard extends StatelessWidget {
                             children: [
                               Container(
                                 child:Text(
-                                    "[기업] 활동 타이틀",
+                                    title,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         fontSize: 18.sp,
@@ -42,7 +55,7 @@ class ReviewCard extends StatelessWidget {
                               Container(
                                 width:MediaQuery.of(context).size.width/1.4,
                                 child: Text(
-                                  "어쩌구저쩌구 ...",
+                                  text,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 14.sp,
@@ -50,7 +63,7 @@ class ReviewCard extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "2023-08-17",
+                                date,
                                 style: TextStyle(color: Colors.black54),
                               ),
                             ],
