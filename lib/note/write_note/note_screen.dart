@@ -109,8 +109,8 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
                   barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      contentPadding: EdgeInsets.zero,
                         elevation: 0,
+                        title: Center(child: Text("카테고리 선택")),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                           side: BorderSide(color: Colors.black26),
@@ -126,21 +126,6 @@ class _WriteNoteScreenState extends State<WriteNoteScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Flexible(
-                              fit:FlexFit.tight,
-                              child:Stack(
-                                alignment: Alignment.centerLeft,
-                        children: [
-                          Padding(padding: EdgeInsets.all(5),
-                          child:  IconButton(padding: EdgeInsets.zero,  constraints: BoxConstraints(),onPressed: ()=>Navigator.pop(context), icon: Icon(Icons.close,size:22.r),color: Colors.black26,)
-                      ),
-                         Container(
-                            alignment: Alignment.center,
-                            child: Text( "카테고리 선택",style: TextStyle(fontSize: 19.sp,fontWeight: FontWeight.w600))
-                          ),
-                        ]
-                          ),),
-                            Container(height: 2,color: Colors.black12),
                             TextButton(
                               style: TextButton.styleFrom(
                                 alignment: Alignment.centerLeft,

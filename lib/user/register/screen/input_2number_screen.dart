@@ -40,7 +40,7 @@ class _InputNumberScreenState extends State<InputNumberScreen> {
                       Text(title, style: TextStyle(fontSize: 22.sp)),
                       SizedBox(height: 10.h),
                       inputnumber(),
-                      errorstring==true ?Padding(padding: EdgeInsets.symmetric(vertical: 5.h) ,child:Text("형식이 올바르지 않습니다.",style: TextStyle(color: Colors.red))):Container()
+                      errorstring==true ?Padding(padding: EdgeInsets.symmetric(vertical: 5.h) ,child:Text("올바르지 않은 인증번호입니다.",style: TextStyle(color: Colors.red))):Container()
                     ])),
     Column(
     children:[
@@ -106,6 +106,7 @@ class _InputNumberScreenState extends State<InputNumberScreen> {
                       border: InputBorder.none,
                       counterText: '',
                     ),
+                    keyboardType: TextInputType.number,
                     controller: one,
                     textInputAction: TextInputAction.next,
                     maxLength: 1,
@@ -127,6 +128,7 @@ class _InputNumberScreenState extends State<InputNumberScreen> {
                   border: InputBorder.none,
                   counterText: '',
                 ),
+                keyboardType: TextInputType.number,
                 controller: two,
                 maxLength: 1,
               ),
@@ -147,6 +149,7 @@ class _InputNumberScreenState extends State<InputNumberScreen> {
                   border: InputBorder.none,
                   counterText: '',
                 ),
+                keyboardType: TextInputType.number,
                 controller: three,
                 maxLength: 1,
               ),
